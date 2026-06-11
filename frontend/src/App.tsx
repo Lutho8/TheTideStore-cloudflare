@@ -12,6 +12,12 @@ import { AccountPage } from './components/pages/AccountPage'
 import { useAuthStore } from './hooks/useAuthStore'
 
 import { CoaPage } from './components/pages/CoaPage'
+import { AboutPage } from './components/pages/AboutPage'
+import { ShippingPage } from './components/pages/ShippingPage'
+import { ContactPage } from './components/pages/ContactPage'
+import { TermsPage } from './components/pages/TermsPage'
+import { PrivacyPage } from './components/pages/PrivacyPage'
+import { BlogPage } from './components/pages/BlogPage'
 
 function App() {
   const [showAuth, setShowAuth] = useState(false)
@@ -32,6 +38,12 @@ function App() {
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/account" element={<AccountPage />} />
           <Route path="/coa" element={<CoaPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/shipping" element={<ShippingPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/blog" element={<BlogPage />} />
         </Routes>
       </main>
       <Footer />

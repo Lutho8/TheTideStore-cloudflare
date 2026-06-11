@@ -22,7 +22,6 @@ export function ShopPage() {
   const [search, setSearch] = useState('')
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
-  const [selectedProduct, setSelectedProduct] = useState<string | null>(null)
 
   useEffect(() => {
     apiFetch('/products').then(data => {
@@ -58,13 +57,7 @@ export function ShopPage() {
                   <Link
                     key={p.id}
                     to={`/product/${p.slug}`}
-                    onMouseEnter={() => setSelectedProduct(p.id)}
-                    onMouseLeave={() => setSelectedProduct(null)}
-                    className={`block text-sm py-1.5 px-2 rounded transition-colors ${
-                      selectedProduct === p.id
-                        ? 'text-blue-600 bg-blue-50'
-                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
-                    }`}
+                    className="block text-sm py-1.5 px-2 rounded transition-colors text-gray-600 hover:text-blue-600 hover:bg-blue-50"
                   >
                     {p.name.replace('Research Compound', '').trim()}
                   </Link>
@@ -100,7 +93,7 @@ export function ShopPage() {
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filtered.map(product => (
-                  <div key={product.id} className="group bg-white rounded-xl p-4 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-transparent hover:border-gray-100">
+                  <div key={product.id} className="group">
                     {/* Card Header */}
                     <div className="mb-3">
                       {product.casNumber && (
@@ -110,7 +103,7 @@ export function ShopPage() {
                         {product.name.replace('Research Compound', '').trim()}
                       </h3>
                       {isBlend(product) && (
-                        <span className="inline-block mt-1 text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded">Blend</span>
+                        <span className="inline-block mt-1 text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">Blend</span>
                       )}
                     </div>
 
@@ -123,7 +116,7 @@ export function ShopPage() {
                     </Link>
 
                     {/* Product Image */}
-                    <Link to={`/product/${product.slug}`} className="block bg-gray-50 rounded-xl overflow-hidden border border-gray-100 aspect-square group-hover:shadow-lg group-hover:-translate-y-1 transition-all duration-300">
+                    <Link to={`/product/${product.slug}`} className="block bg-gray-50 rounded-xl overflow-hidden border border-gray-100 aspect-square group-hover:shadow-lg transition-all duration-300">
                       {product.images[0] ? (
                         <img
                           src={product.images[0].url}

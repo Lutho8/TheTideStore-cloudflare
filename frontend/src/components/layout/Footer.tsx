@@ -3,33 +3,30 @@ import { Link } from 'react-router-dom'
 export function Footer() {
   return (
     <footer className="bg-gray-50 border-t border-gray-200">
-      {/* Main Footer */}
+      {/* Top Footer Band */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-          {/* Left - Brand */}
+          {/* Left */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <img src="/logo-animated.png" alt="Ride The Tide" className="h-8 w-auto" />
-            </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-1">Verified compounds.</h3>
-            <h3 className="text-xl font-bold text-gray-900 mb-4">Ready to ship.</h3>
+            <h3 className="text-2xl font-bold text-gray-900">Verified compounds.</h3>
+            <h3 className="text-2xl font-bold text-gray-900">Ready to ship.</h3>
           </div>
 
-          {/* Right - Contact */}
+          {/* Right */}
           <div className="md:text-right">
             <p className="text-sm text-gray-600 mb-2">
               Need help? Text us, and a team member will reply in minutes.
             </p>
-            <a 
-              href="https://wa.me/491624747159" 
-              target="_blank" 
+            <a
+              href="https://wa.me/491624747159"
+              target="_blank"
               rel="noopener noreferrer"
               className="text-blue-600 font-semibold hover:underline block mb-1"
             >
               +49 162 4747159
             </a>
-            <a 
-              href="mailto:support@ridethetide.site" 
+            <a
+              href="mailto:support@ridethetide.site"
               className="text-blue-600 hover:underline text-sm"
             >
               support@ridethetide.site

@@ -34,18 +34,27 @@ export function HomePage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero */}
-      <section className="relative bg-gray-50 pt-16 pb-20">
+      <section className="relative bg-gray-50 pt-16 pb-20 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl">
-            <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
-              research peptides
-            </h1>
-            <Link
-              to="/shop"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-full font-medium hover:bg-blue-700 transition-colors"
-            >
-              View Products <ArrowRight className="h-4 w-4" />
-            </Link>
+          <div className="flex flex-col lg:flex-row items-center gap-12">
+            <div className="max-w-2xl">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
+                Laboratory grade
+              </h1>
+              <p className="text-lg text-gray-500 mb-2">Lyophilized in the USA.</p>
+              <p className="text-lg text-gray-500 mb-8">Made in-house.</p>
+              <Link
+                to="/shop"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-full font-medium hover:bg-blue-700 transition-colors"
+              >
+                View Products <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+            <div className="hidden lg:flex flex-1 justify-end">
+              <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+                <FlaskConical className="h-32 w-32 text-blue-600" />
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -55,9 +64,9 @@ export function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Card 1 */}
-            <div className="bg-gray-50 rounded-2xl p-6 flex flex-col">
+            <div className="bg-gray-50 rounded-2xl p-6 flex flex-col hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
               <div className="mb-4">
-                <h3 className="text-lg font-bold text-gray-900">Lyophilized<br />in the EU.</h3>
+                <h3 className="text-lg font-bold text-gray-900">Lyophilized<br />in the USA.</h3>
                 <p className="text-sm text-gray-500 mt-1">Made in-house.</p>
               </div>
               <Link
@@ -74,10 +83,10 @@ export function HomePage() {
             </div>
 
             {/* Card 2 */}
-            <div className="bg-gray-50 rounded-2xl p-6 flex flex-col">
+            <div className="bg-gray-50 rounded-2xl p-6 flex flex-col hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
               <div className="mb-4">
                 <h3 className="text-lg font-bold text-gray-900">No more<br />guessing games.</h3>
-                <p className="text-sm text-gray-500 mt-1">EU-made, third-party batch tested.</p>
+                <p className="text-sm text-gray-500 mt-1">US-made, third-party batch tested.</p>
               </div>
               <Link
                 to="/shop"
@@ -93,7 +102,7 @@ export function HomePage() {
             </div>
 
             {/* Card 3 */}
-            <div className="bg-gray-50 rounded-2xl p-6 flex flex-col">
+            <div className="bg-gray-50 rounded-2xl p-6 flex flex-col hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
               <div className="mb-4">
                 <h3 className="text-lg font-bold text-gray-900">Batch Produced,<br />Batch Tested</h3>
                 <p className="text-sm text-gray-500 mt-1">COAs available for each batch.</p>
@@ -145,7 +154,7 @@ export function HomePage() {
                 >
                   View Product <ChevronRight className="h-4 w-4" />
                 </Link>
-                <Link to={`/product/${product.slug}`} className="block bg-gray-50 rounded-xl overflow-hidden border border-gray-100 aspect-square relative group-hover:shadow-lg transition-all duration-300">
+                <Link to={`/product/${product.slug}`} className="block bg-gray-50 rounded-xl overflow-hidden border border-gray-100 aspect-square relative">
                   {product.images[0] ? (
                     <img
                       src={product.images[0].url}
@@ -194,7 +203,7 @@ export function HomePage() {
               {
                 step: 'STEP 1',
                 title: 'Precision Lyophilization',
-                desc: 'Manufactured in a controlled EU facility under strict compounding standards.',
+                desc: 'Manufactured in a controlled facility under strict compounding standards.',
                 icon: FlaskConical,
               },
               {
@@ -206,7 +215,7 @@ export function HomePage() {
               {
                 step: 'STEP 3',
                 title: 'Same-Day Fulfillment',
-                desc: 'Orders dispatched same-day from our EU facility.',
+                desc: 'Orders dispatched same-day from our facility.',
                 icon: Truck,
               },
             ].map(item => (
