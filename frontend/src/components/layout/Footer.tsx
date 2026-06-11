@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import { FlaskConical } from 'lucide-react'
 
 export function Footer() {
   return (
@@ -10,8 +9,7 @@ export function Footer() {
           {/* Left - Brand */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <FlaskConical className="h-6 w-6 text-blue-600" />
-              <span className="font-bold text-gray-900 text-lg">Ride The Tide</span>
+              <img src="/logo-animated.png" alt="Ride The Tide" className="h-8 w-auto" />
             </div>
             <h3 className="text-xl font-bold text-gray-900 mb-1">Verified compounds.</h3>
             <h3 className="text-xl font-bold text-gray-900 mb-4">Ready to ship.</h3>

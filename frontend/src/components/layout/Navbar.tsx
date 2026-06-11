@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { FlaskConical, ShoppingCart, User, Menu, X } from 'lucide-react'
+import { ShoppingCart, User, Menu, X } from 'lucide-react'
 import { useState } from 'react'
 import { useAuthStore } from '../../hooks/useAuthStore'
 
@@ -13,10 +13,7 @@ export function Navbar({ onAuthClick }: { onAuthClick: () => void }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center gap-2">
-            <FlaskConical className="h-6 w-6 text-blue-600" />
-            <span className="text-lg font-bold tracking-tight text-gray-900">
-              Ride The Tide
-            </span>
+            <img src="/logo-animated.png" alt="Ride The Tide" className="h-8 w-auto" />
           </Link>
 
           <div className="hidden md:flex items-center gap-8">

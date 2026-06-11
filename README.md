@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/logo-animated.png" alt="Ride The Tide Logo" width="180" />
+</p>
+
 # Ride The Tide — Cloudflare-Native E-Commerce Platform
 
 A premium research peptide e-commerce platform built for **South Africa** and **Germany**. Runs entirely on Cloudflare — no Vercel, no AWS, no server management.
