@@ -14,26 +14,23 @@ orders.use('*', async (c, next) => {
   await next()
 })
 
-// Create order
+// Create order (Euro-only)
 orders.post('/', async (c) => {
   const userId = c.get('userId')
   const { items, shippingAddressId, paymentMethod, customerNote } = await c.req.json()
 
-  // Get user for market/currency
-  const user = await c.env.DB.prepare('SELECT market FROM users WHERE id = ?').bind(userId).first()
-  const market = user?.market || 'ZA'
-  const currency = market === 'DE' ? 'EUR' : 'ZAR'
+  const currency = 'EUR'
 
   // Calculate totals
   let subtotal = 0
   for (const item of items) {
     const variant = await c.env.DB.prepare(
-      `SELECT CASE WHEN ? = 'DE' THEN price_de ELSE price_za END as price FROM product_variants WHERE id = ?`
-    ).bind(market, item.variantId || item.productId).first()
+      `SELECT price FROM product_variants WHERE id = ?`
+    ).bind(item.variantId || item.productId).first()
     subtotal += (variant?.price || 0) * item.quantity
   }
 
-  const shippingCost = subtotal > (market === 'DE' ? 300 : 5000) ? 0 : (market === 'DE' ? 15 : 150)
+  const shippingCost = subtotal > 300 ? 0 : 15  // Free shipping over €300
   const total = subtotal + shippingCost
 
   // Generate order number
@@ -51,8 +48,8 @@ orders.post('/', async (c) => {
     const product = await c.env.DB.prepare('SELECT name, sku FROM products WHERE id = ?').bind(item.productId).first()
     const variant = item.variantId ? await c.env.DB.prepare('SELECT name FROM product_variants WHERE id = ?').bind(item.variantId).first() : null
     const price = await c.env.DB.prepare(
-      `SELECT CASE WHEN ? = 'DE' THEN price_de ELSE price_za END as price FROM product_variants WHERE id = ?`
-    ).bind(market, item.variantId || item.productId).first()
+      `SELECT price FROM product_variants WHERE id = ?`
+    ).bind(item.variantId || item.productId).first()
 
     await c.env.DB.prepare(
       `INSERT INTO order_items (id, order_id, product_id, variant_id, quantity, unit_price, total_price, product_name, product_sku, variant_name)

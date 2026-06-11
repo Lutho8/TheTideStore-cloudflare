@@ -1,46 +1,72 @@
 import { Link } from 'react-router-dom'
-import { FlaskConical, Shield, Mail } from 'lucide-react'
+import { FlaskConical } from 'lucide-react'
 
 export function Footer() {
   return (
-    <footer className="border-t border-slate-800 bg-slate-950">
+    <footer className="bg-gray-50 border-t border-gray-200">
+      {/* Main Footer */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <FlaskConical className="h-5 w-5 text-tide-400" />
-              <span className="font-bold">Ride The Tide</span>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+          {/* Left - Brand */}
+          <div>
+            <div className="flex items-center gap-2 mb-4">
+              <FlaskConical className="h-6 w-6 text-blue-600" />
+              <span className="font-bold text-gray-900 text-lg">Ride The Tide</span>
             </div>
-            <p className="text-sm text-slate-400">
-              Premium research peptides for the scientific community. 99%+ HPLC purity. COA on every batch.
+            <h3 className="text-xl font-bold text-gray-900 mb-1">Verified compounds.</h3>
+            <h3 className="text-xl font-bold text-gray-900 mb-4">Ready to ship.</h3>
+          </div>
+
+          {/* Right - Contact */}
+          <div className="md:text-right">
+            <p className="text-sm text-gray-600 mb-2">
+              Need help? Text us, and a team member will reply in minutes.
             </p>
-          </div>
-          <div>
-            <h4 className="font-semibold text-sm mb-4">Markets</h4>
-            <ul className="space-y-2 text-sm text-slate-400">
-              <li><span className="text-white">South Africa</span> — Cape Town, JHB, Durban</li>
-              <li><span className="text-white">Germany</span> — Berlin, Munich, Hamburg</li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-semibold text-sm mb-4">Legal</h4>
-            <ul className="space-y-2 text-sm text-slate-400">
-              <li><Link to="/ruo" className="hover:text-white">Research Use Only</Link></li>
-              <li><Link to="/terms" className="hover:text-white">Terms</Link></li>
-              <li><Link to="/privacy" className="hover:text-white">Privacy</Link></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-semibold text-sm mb-4">Support</h4>
-            <ul className="space-y-2 text-sm text-slate-400">
-              <li className="flex items-center gap-2"><Mail className="h-4 w-4" /> support@ridethetide.site</li>
-              <li className="flex items-center gap-2"><Shield className="h-4 w-4" /> WhatsApp Support</li>
-            </ul>
+            <a 
+              href="https://wa.me/491624747159" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-blue-600 font-semibold hover:underline block mb-1"
+            >
+              +49 162 4747159
+            </a>
+            <a 
+              href="mailto:support@ridethetide.site" 
+              className="text-blue-600 hover:underline text-sm"
+            >
+              support@ridethetide.site
+            </a>
           </div>
         </div>
-        <div className="mt-12 pt-8 border-t border-slate-800 text-center text-xs text-slate-600">
-          <p className="mb-2">All products are for research and development use only. Not for human consumption.</p>
-          <p>© {new Date().getFullYear()} Ride The Tide. South Africa & Germany.</p>
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="border-t border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-gray-500">
+              © Ride The Tide {new Date().getFullYear()}. All rights reserved.
+            </p>
+            <div className="flex items-center gap-4 text-sm">
+              <Link to="/privacy" className="text-gray-500 hover:text-gray-900">Privacy Policy</Link>
+              <Link to="/terms" className="text-gray-500 hover:text-gray-900">Terms of Service</Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Legal Disclaimer */}
+      <div className="border-t border-gray-200 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <p className="text-xs text-gray-500 leading-relaxed mb-3">
+            All products on this site are for research and development use only. Products are not for human consumption of any kind. The statements made on this website have not been evaluated by the US Food and Drug Administration. The statements and the products of this company are not intended to diagnose, treat, cure, or prevent any disease.
+          </p>
+          <p className="text-xs text-gray-500 leading-relaxed mb-3">
+            Ride The Tide is a chemical supplier. Ride The Tide is not a compounding pharmacy or chemical compounding facility as defined under 503A of the Federal Food, Drug, and Cosmetic Act. Ride The Tide is not an outsourcing facility as defined under 503B of the Federal Food, Drug, and Cosmetic Act.
+          </p>
+          <p className="text-xs text-gray-500 leading-relaxed">
+            All products are sold for research, laboratory, or analytical purposes only, and are not for human consumption.
+          </p>
         </div>
       </div>
     </footer>

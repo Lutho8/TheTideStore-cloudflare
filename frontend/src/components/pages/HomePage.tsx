@@ -1,90 +1,280 @@
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, FlaskConical, Shield, Truck, Microscope, Globe } from 'lucide-react'
+import { apiFetch } from '../../hooks/useAuthStore'
+import { ArrowRight, ChevronRight, Beaker, FlaskConical, Shield, Microscope, Truck, MessageCircle } from 'lucide-react'
+
+interface Product {
+  id: string
+  codeLabel: string
+  name: string
+  slug: string
+  casNumber: string | null
+  images: { url: string }[]
+}
 
 export function HomePage() {
+  const [products, setProducts] = useState<Product[]>([])
+  const [openFaq, setOpenFaq] = useState<number | null>(null)
+
+  useEffect(() => {
+    apiFetch('/products?limit=8').then(data => {
+      setProducts(data.products || [])
+    })
+  }, [])
+
+  const faqs = [
+    { q: "Are your products tested?", a: "Every batch is third-party tested by Janoshik Laboratory for purity (99%+ HPLC), identity, and quantity. COAs are available for download on each product page." },
+    { q: "Where do you ship from?", a: "All orders ship same-day from our EU facility via DHL or DPD Express. Tracking is provided within 24 hours." },
+    { q: "Are these for human consumption?", a: "No. All products are sold strictly for research, laboratory, and analytical purposes only. Not for human or animal consumption." },
+    { q: "Do you ship internationally?", a: "We ship throughout the European Union, Switzerland, and selected international destinations. Contact us for specific country availability." },
+    { q: "What payment methods do you accept?", a: "We accept Stripe (Card / SEPA), and cryptocurrency via NowPayments (BTC, ETH, USDT)." },
+    { q: "How should I store these products?", a: "Store lyophilized peptides in a cool, dry place away from direct sunlight. For long-term storage, refrigeration at 2-8°C is recommended." },
+  ]
+
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white">
       {/* Hero */}
-      <section className="relative overflow-hidden bg-slate-950 pt-20 pb-32">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-tide-900/20 via-slate-950 to-slate-950" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-tide-500/10 border border-tide-500/20 text-tide-400 text-sm mb-8">
-              <Globe className="h-4 w-4" />
-              South Africa & Germany — Research Use Only
-            </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
-              Premium Research <span className="text-tide-400">Peptides</span>
+      <section className="relative bg-gray-50 pt-16 pb-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl">
+            <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
+              research peptides
             </h1>
-            <p className="text-lg text-slate-400 mb-8 max-w-2xl mx-auto">
-              99%+ HPLC purity. COA on every batch. Same-day dispatch from Cape Town & Berlin.
-              For qualified researchers only.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/shop" className="inline-flex items-center justify-center gap-2 bg-tide-600 hover:bg-tide-500 text-white px-8 py-4 rounded-xl font-medium transition-colors">
-                Browse Catalog <ArrowRight className="h-5 w-5" />
+            <Link
+              to="/shop"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-full font-medium hover:bg-blue-700 transition-colors"
+            >
+              View Products <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Feature Cards */}
+      <section className="py-12 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Card 1 */}
+            <div className="bg-gray-50 rounded-2xl p-6 flex flex-col">
+              <div className="mb-4">
+                <h3 className="text-lg font-bold text-gray-900">Lyophilized<br />in the EU.</h3>
+                <p className="text-sm text-gray-500 mt-1">Made in-house.</p>
+              </div>
+              <Link
+                to="/shop"
+                className="inline-flex items-center gap-1 px-4 py-2 bg-blue-600 text-white text-sm rounded-full hover:bg-blue-700 transition-colors w-fit"
+              >
+                View Products <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link to="/testing" className="inline-flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-8 py-4 rounded-xl font-medium transition-colors">
-                <Microscope className="h-5 w-5" /> Lab Testing
+              <div className="mt-4 flex-1 flex items-end justify-center">
+                <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-sm">
+                  <FlaskConical className="h-16 w-16 text-blue-600" />
+                </div>
+              </div>
+            </div>
+
+            {/* Card 2 */}
+            <div className="bg-gray-50 rounded-2xl p-6 flex flex-col">
+              <div className="mb-4">
+                <h3 className="text-lg font-bold text-gray-900">No more<br />guessing games.</h3>
+                <p className="text-sm text-gray-500 mt-1">EU-made, third-party batch tested.</p>
+              </div>
+              <Link
+                to="/shop"
+                className="inline-flex items-center gap-1 px-4 py-2 bg-blue-600 text-white text-sm rounded-full hover:bg-blue-700 transition-colors w-fit"
+              >
+                View Products <ArrowRight className="h-4 w-4" />
               </Link>
+              <div className="mt-4 flex-1 flex items-end justify-center">
+                <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-sm">
+                  <Microscope className="h-16 w-16 text-blue-600" />
+                </div>
+              </div>
+            </div>
+
+            {/* Card 3 */}
+            <div className="bg-gray-50 rounded-2xl p-6 flex flex-col">
+              <div className="mb-4">
+                <h3 className="text-lg font-bold text-gray-900">Batch Produced,<br />Batch Tested</h3>
+                <p className="text-sm text-gray-500 mt-1">COAs available for each batch.</p>
+              </div>
+              <Link
+                to="/coa"
+                className="inline-flex items-center gap-1 px-4 py-2 bg-blue-600 text-white text-sm rounded-full hover:bg-blue-700 transition-colors w-fit"
+              >
+                View COA <ArrowRight className="h-4 w-4" />
+              </Link>
+              <div className="mt-4 flex-1 flex items-end justify-center">
+                <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-sm">
+                  <Shield className="h-16 w-16 text-blue-600" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Trust badges */}
-      <section className="border-y border-slate-800 bg-slate-900/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      {/* Research Use Only Banner */}
+      <section className="py-8 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
+            <h3 className="font-semibold text-gray-900 mb-2">Research Use Only</h3>
+            <p className="text-sm text-gray-600 leading-relaxed">
+              All products are intended solely for laboratory research and are not for human or animal consumption. By purchasing, the buyer agrees to use these products in compliance with all applicable laws. All products currently listed on this site are for research purposes ONLY.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Explore Products */}
+      <section className="py-12 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl font-bold text-gray-900 mb-8">Explore our products</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {products.map(product => (
+              <div key={product.id} className="group">
+                {product.casNumber && (
+                  <p className="text-xs text-gray-400 mb-1">CAS #: {product.casNumber}</p>
+                )}
+                <h3 className="font-bold text-gray-900 mb-2">
+                  {product.name.replace('Research Compound', '').trim()}
+                </h3>
+                <Link
+                  to={`/product/${product.slug}`}
+                  className="inline-flex items-center gap-1 px-4 py-2 bg-blue-600 text-white text-sm rounded-full hover:bg-blue-700 transition-colors mb-3"
+                >
+                  View Product <ChevronRight className="h-4 w-4" />
+                </Link>
+                <Link to={`/product/${product.slug}`} className="block bg-gray-50 rounded-xl overflow-hidden border border-gray-100 aspect-square">
+                  {product.images[0] ? (
+                    <img
+                      src={product.images[0].url}
+                      alt={product.name}
+                      className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <Beaker className="h-12 w-12 text-gray-300" />
+                    </div>
+                  )}
+                </Link>
+              </div>
+            ))}
+          </div>
+          <div className="text-center mt-8">
+            <Link
+              to="/shop"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-gray-300 text-gray-700 rounded-full font-medium hover:border-gray-400 transition-colors"
+            >
+              View All Products <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Process */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-2xl font-bold text-gray-900">Our Process</h2>
+            <Link
+              to="/shop"
+              className="inline-flex items-center gap-1 px-4 py-2 bg-blue-600 text-white text-sm rounded-full hover:bg-blue-700 transition-colors"
+            >
+              View Products <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
-              { icon: Microscope, title: '99%+ HPLC', desc: 'Third-party verified' },
-              { icon: Shield, title: 'COA Every Batch', desc: 'Janoshik tested' },
-              { icon: Truck, title: 'Same-Day Dispatch', desc: 'Cape Town & Berlin' },
-              { icon: FlaskConical, title: 'Research Only', desc: 'Not for human use' },
-            ].map(b => (
-              <div key={b.title}>
-                <div className="inline-flex p-3 bg-tide-500/10 rounded-xl mb-3"><b.icon className="h-6 w-6 text-tide-400" /></div>
-                <h3 className="font-semibold text-sm">{b.title}</h3>
-                <p className="text-xs text-slate-500 mt-1">{b.desc}</p>
+              {
+                step: 'STEP 1',
+                title: 'Precision Lyophilization',
+                desc: 'Manufactured in a controlled EU facility under strict compounding standards.',
+                icon: FlaskConical,
+              },
+              {
+                step: 'STEP 2',
+                title: 'Verified Purity',
+                desc: 'Every batch third-party tested with HPLC and mass spectrometry.',
+                icon: Microscope,
+              },
+              {
+                step: 'STEP 3',
+                title: 'Same-Day Fulfillment',
+                desc: 'Orders dispatched same-day from our EU facility.',
+                icon: Truck,
+              },
+            ].map(item => (
+              <div key={item.step} className="bg-white rounded-2xl overflow-hidden border border-gray-200">
+                <div className="h-48 bg-gray-100 flex items-center justify-center">
+                  <item.icon className="h-20 w-20 text-blue-600" />
+                </div>
+                <div className="p-6">
+                  <span className="text-xs font-semibold text-gray-400 uppercase">{item.step}</span>
+                  <h3 className="font-bold text-gray-900 mt-1 mb-2">{item.title}</h3>
+                  <p className="text-sm text-gray-600">{item.desc}</p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Categories */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4">Research Categories</h2>
-            <p className="text-slate-400">Browse our catalog by research area</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { title: 'GLP-1 & Metabolic', desc: 'Triple agonists, dual agonists, and metabolic research compounds.', href: '/shop?tag=GLP-1', code: 'DP Series' },
-              { title: 'Healing & Recovery', desc: 'BPC-157, TB-500, and tissue repair research peptides.', href: '/shop?tag=healing', code: 'HR Series' },
-              { title: 'Growth & Performance', desc: 'CJC-1295, Ipamorelin, Tesamorelin, and related compounds.', href: '/shop?tag=growth', code: 'GP Series' },
-            ].map(cat => (
-              <Link key={cat.title} to={cat.href} className="group block p-6 bg-slate-900 border border-slate-800 rounded-2xl hover:border-tide-500/50 transition-colors">
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-xs font-mono text-tide-400 bg-tide-500/10 px-2 py-1 rounded">{cat.code}</span>
-                  <ArrowRight className="h-5 w-5 text-slate-600 group-hover:text-tide-400 transition-colors" />
-                </div>
-                <h3 className="font-semibold text-lg mb-2">{cat.title}</h3>
-                <p className="text-sm text-slate-400">{cat.desc}</p>
-              </Link>
-            ))}
+      {/* SMS Support */}
+      <section className="py-12 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-gray-50 rounded-2xl p-8 border border-gray-200">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+              <div>
+                <h3 className="text-xl font-bold text-gray-900 mb-1">Text us, our dedicated team is here to help</h3>
+                <p className="text-sm text-gray-600">Reach out and get a response within minutes.</p>
+              </div>
+              <a
+                href="https://wa.me/491624747159"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-full font-medium hover:bg-blue-700 transition-colors shrink-0"
+              >
+                <MessageCircle className="h-5 w-5" /> Text Us
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Legal */}
-      <section className="border-t border-slate-800 py-12">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <p className="text-xs text-slate-600 leading-relaxed">
-            All products are for research and development use only. Not for human consumption.
-            Ride The Tide is a chemical supplier. Not a compounding pharmacy. All products sold for research, laboratory, or analytical purposes only.
-          </p>
+      {/* FAQ */}
+      <section className="py-12 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between mb-8">
+            <div>
+              <h2 className="text-2xl font-bold text-gray-900">Frequently Asked Questions</h2>
+              <p className="text-sm text-gray-500 mt-1">Everything you need to know about our products and processes.</p>
+            </div>
+            <Link
+              to="/shop"
+              className="hidden sm:inline-flex items-center gap-1 px-4 py-2 bg-blue-600 text-white text-sm rounded-full hover:bg-blue-700 transition-colors"
+            >
+              View Products <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {faqs.map((faq, i) => (
+              <div key={i} className="border border-gray-200 rounded-xl overflow-hidden">
+                <button
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  className="w-full flex items-center justify-between p-4 text-left hover:bg-gray-50 transition-colors"
+                >
+                  <span className="font-medium text-sm text-gray-900">{faq.q}</span>
+                  <ChevronRight className={`h-4 w-4 text-gray-400 shrink-0 transition-transform ${openFaq === i ? 'rotate-90' : ''}`} />
+                </button>
+                {openFaq === i && (
+                  <div className="px-4 pb-4">
+                    <p className="text-sm text-gray-600 leading-relaxed">{faq.a}</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </div>

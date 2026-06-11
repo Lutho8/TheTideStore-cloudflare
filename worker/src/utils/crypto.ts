@@ -8,7 +8,7 @@ export async function signJWT(payload: object, secret: string): Promise<string> 
     .sign(encoder.encode(secret))
 }
 
-export async function verifyJWT(token: string, secret: string): Promise<{ userId: string; phone: string; market: string } | null> {
+export async function verifyJWT(token: string, secret: string): Promise<{ userId: string; phone: string } | null> {
   try {
     const encoder = new TextEncoder()
     const { payload } = await jwtVerify(token, encoder.encode(secret), { clockTolerance: 60 })

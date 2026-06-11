@@ -5,7 +5,6 @@ interface User {
   phone: string
   name: string | null
   email: string | null
-  market: 'ZA' | 'DE'
 }
 
 interface AuthState {

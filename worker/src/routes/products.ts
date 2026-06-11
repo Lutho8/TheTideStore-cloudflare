@@ -3,9 +3,8 @@ import type { Env } from '../index'
 
 const products = new Hono<{ Bindings: Env }>()
 
-// List products (with market-specific pricing)
+// List products (Euro-only pricing)
 products.get('/', async (c) => {
-  const market = c.req.header('X-Market') || 'ZA'
   const search = c.req.query('search') || ''
   const tag = c.req.query('tag') || ''
   const limit = Math.min(parseInt(c.req.query('limit') || '50'), 100)
@@ -32,15 +31,12 @@ products.get('/', async (c) => {
 
   const { results } = await c.env.DB.prepare(query).bind(...params).all()
 
-  // Get variants with market pricing
+  // Get variants with Euro pricing
   const productsWithVariants = await Promise.all((results || []).map(async (product: any) => {
     const { results: variants } = await c.env.DB.prepare(
-      `SELECT id, name, sku, dosage_mg, vial_count, 
-        CASE WHEN ? = 'DE' THEN price_de ELSE price_za END as price,
-        CASE WHEN ? = 'DE' THEN compare_price_de ELSE compare_price_za END as compare_price,
-        is_default
+      `SELECT id, name, sku, dosage_mg, vial_count, price, compare_price, currency, is_default
       FROM product_variants WHERE product_id = ? ORDER BY sort_order ASC`
-    ).bind(market, market, product.id).all()
+    ).bind(product.id).all()
 
     const { results: images } = await c.env.DB.prepare(
       'SELECT url, alt, is_primary FROM product_images WHERE product_id = ? ORDER BY sort_order ASC'
@@ -59,7 +55,6 @@ products.get('/', async (c) => {
 // Get single product
 products.get('/:slug', async (c) => {
   const slug = c.req.param('slug')
-  const market = c.req.header('X-Market') || 'ZA'
 
   const product = await c.env.DB.prepare(
     `SELECT p.*, c.name as category_name
@@ -70,14 +65,11 @@ products.get('/:slug', async (c) => {
 
   if (!product) return c.json({ error: 'Product not found' }, 404)
 
-  // Get variants with market pricing
+  // Get variants with Euro pricing
   const { results: variants } = await c.env.DB.prepare(
-    `SELECT id, name, sku, dosage_mg, vial_count,
-      CASE WHEN ? = 'DE' THEN price_de ELSE price_za END as price,
-      CASE WHEN ? = 'DE' THEN compare_price_de ELSE compare_price_za END as compare_price,
-      is_default
+    `SELECT id, name, sku, dosage_mg, vial_count, price, compare_price, currency, is_default
     FROM product_variants WHERE product_id = ? ORDER BY sort_order ASC`
-  ).bind(market, market, product.id).all()
+  ).bind(product.id).all()
 
   const { results: images } = await c.env.DB.prepare(
     'SELECT url, alt, is_primary FROM product_images WHERE product_id = ? ORDER BY sort_order ASC'
@@ -85,6 +77,10 @@ products.get('/:slug', async (c) => {
 
   const { results: references } = await c.env.DB.prepare(
     'SELECT * FROM research_references WHERE product_id = ? ORDER BY sort_order ASC'
+  ).bind(product.id).all()
+
+  const { results: coaBatches } = await c.env.DB.prepare(
+    'SELECT * FROM coa_batches WHERE product_id = ? ORDER BY sort_order ASC'
   ).bind(product.id).all()
 
   // Increment view count
@@ -95,6 +91,7 @@ products.get('/:slug', async (c) => {
     variants: variants || [],
     images: images || [],
     references: references || [],
+    coaBatches: coaBatches || [],
   })
 })
 

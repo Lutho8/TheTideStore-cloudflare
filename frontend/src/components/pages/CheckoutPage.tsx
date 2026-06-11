@@ -4,7 +4,6 @@ import { apiFetch, useAuthStore } from '../../hooks/useAuthStore'
 import { CreditCard, Bitcoin, Banknote, ArrowRight, Loader2, Shield, MapPin, Package } from 'lucide-react'
 
 const METHODS = [
-  { id: 'payfast', name: 'PayFast', desc: 'Card / Instant EFT (South Africa)', icon: CreditCard },
   { id: 'stripe', name: 'Stripe', desc: 'Card / SEPA (Germany & EU)', icon: CreditCard },
   { id: 'nowpayments', name: 'Crypto', desc: 'BTC, ETH, USDT', icon: Bitcoin },
 ]
@@ -12,9 +11,9 @@ const METHODS = [
 export function CheckoutPage() {
   const { user } = useAuthStore()
   const navigate = useNavigate()
-  const [method, setMethod] = useState('payfast')
+  const [method, setMethod] = useState('stripe')
   const [loading, setLoading] = useState(false)
-  const [address, setAddress] = useState({ recipientName: '', phone: '', street: '', city: '', province: '', postalCode: '', country: 'ZA' })
+  const [address, setAddress] = useState({ recipientName: '', phone: '', street: '', city: '', province: '', postalCode: '', country: 'DE' })
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -56,17 +55,12 @@ export function CheckoutPage() {
                 <input type="text" placeholder="Street" value={address.street} onChange={e => setAddress({ ...address, street: e.target.value })} className="sm:col-span-2 bg-slate-800 border border-slate-700 rounded-lg py-3 px-4 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-tide-500" />
                 <input type="text" placeholder="City" value={address.city} onChange={e => setAddress({ ...address, city: e.target.value })} className="bg-slate-800 border border-slate-700 rounded-lg py-3 px-4 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-tide-500" />
                 <select value={address.country} onChange={e => setAddress({ ...address, country: e.target.value })} className="bg-slate-800 border border-slate-700 rounded-lg py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-tide-500">
-                  <option value="ZA">South Africa</option>
                   <option value="DE">Germany</option>
+                  <option value="AT">Austria</option>
+                  <option value="CH">Switzerland</option>
+                  <option value="NL">Netherlands</option>
+                  <option value="BE">Belgium</option>
                 </select>
-                {address.country === 'ZA' && (
-                  <select value={address.province} onChange={e => setAddress({ ...address, province: e.target.value })} className="sm:col-span-2 bg-slate-800 border border-slate-700 rounded-lg py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-tide-500">
-                    <option value="">Select Province</option>
-                    <option>Western Cape</option><option>Gauteng</option><option>KwaZulu-Natal</option>
-                    <option>Eastern Cape</option><option>Free State</option><option>Limpopo</option>
-                    <option>Mpumalanga</option><option>North West</option><option>Northern Cape</option>
-                  </select>
-                )}
                 <input type="text" placeholder="Postal Code" value={address.postalCode} onChange={e => setAddress({ ...address, postalCode: e.target.value })} className="bg-slate-800 border border-slate-700 rounded-lg py-3 px-4 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-tide-500" />
               </div>
             </div>
@@ -93,7 +87,7 @@ export function CheckoutPage() {
             <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
               <h2 className="font-semibold flex items-center gap-2 mb-4"><Package className="h-5 w-5 text-tide-400" />Order Summary</h2>
               <div className="border-t border-slate-800 pt-4 space-y-2">
-                <div className="flex justify-between text-sm"><span className="text-slate-400">Subtotal</span><span>R0.00</span></div>
+                <div className="flex justify-between text-sm"><span className="text-slate-400">Subtotal</span><span>€0.00</span></div>
                 <div className="flex justify-between text-sm"><span className="text-slate-400">Shipping</span><span>Calculated</span></div>
                 <div className="flex justify-between text-lg font-bold pt-2 border-t border-slate-800"><span>Total</span><span>TBD</span></div>
               </div>

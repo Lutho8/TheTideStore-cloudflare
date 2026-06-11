@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import { Navbar } from './components/layout/Navbar'
+import { Header } from './components/layout/Navbar'
 import { Footer } from './components/layout/Footer'
 import { ComplianceGate } from './components/compliance/ComplianceGate'
 import { AuthModal } from './components/auth/AuthModal'
@@ -20,8 +20,8 @@ function App() {
   }, [checkSession])
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
-      <Navbar onAuthClick={() => setShowAuth(true)} />
+    <div className="min-h-screen bg-white text-gray-900">
+      <Header onAuthClick={() => setShowAuth(true)} />
       <main>
         <Routes>
           <Route path="/" element={<HomePage />} />

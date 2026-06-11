@@ -9,7 +9,7 @@ auth.post('/otp', async (c) => {
   const { phone, channel = 'whatsapp' } = await c.req.json()
   if (!phone || phone.length < 10) return c.json({ error: 'Invalid phone number' }, 400)
 
-  // Normalize South African phone
+  // Normalize phone number (international format)
   let normalized = phone.replace(/\s/g, '').replace(/^0/, '+27')
   if (!normalized.startsWith('+')) normalized = '+27' + normalized
 
@@ -113,9 +113,9 @@ auth.post('/verify', async (c) => {
   if (!user) {
     const userId = crypto.randomUUID()
     await c.env.DB.prepare(
-      'INSERT INTO users (id, phone, phone_verified, market) VALUES (?, ?, 1, ?)'
-    ).bind(userId, normalized, 'ZA').run()
-    user = { id: userId, phone: normalized, phone_verified: 1, market: 'ZA' }
+      'INSERT INTO users (id, phone, phone_verified) VALUES (?, ?, 1)'
+    ).bind(userId, normalized).run()
+    user = { id: userId, phone: normalized, phone_verified: 1 }
   } else {
     await c.env.DB.prepare('UPDATE users SET phone_verified = 1, updated_at = datetime("now") WHERE id = ?').bind(user.id).run()
   }
@@ -133,7 +133,7 @@ auth.post('/verify', async (c) => {
   }
 
   // Generate JWT
-  const token = await signJWT({ userId: user.id, phone: user.phone, market: user.market }, c.env.JWT_SECRET)
+  const token = await signJWT({ userId: user.id, phone: user.phone }, c.env.JWT_SECRET)
 
   return c.json({
     success: true,
@@ -142,7 +142,6 @@ auth.post('/verify', async (c) => {
       id: user.id,
       phone: user.phone,
       name: user.name,
-      market: user.market,
     },
   })
 })
@@ -156,7 +155,7 @@ auth.get('/me', async (c) => {
   const payload = await verifyJWT(token, c.env.JWT_SECRET)
   if (!payload) return c.json({ error: 'Invalid token' }, 401)
 
-  const user = await c.env.DB.prepare('SELECT id, phone, name, email, market FROM users WHERE id = ?').bind(payload.userId).first()
+  const user = await c.env.DB.prepare('SELECT id, phone, name, email FROM users WHERE id = ?').bind(payload.userId).first()
   if (!user) return c.json({ error: 'User not found' }, 404)
 
   return c.json(user)

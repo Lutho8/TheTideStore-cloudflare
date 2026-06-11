@@ -8,7 +8,6 @@ CREATE TABLE IF NOT EXISTS users (
   phone_verified INTEGER DEFAULT 0,
   email TEXT,
   name TEXT,
-  market TEXT DEFAULT 'ZA' CHECK (market IN ('ZA', 'DE')),
   created_at TEXT DEFAULT (datetime('now')),
   updated_at TEXT DEFAULT (datetime('now'))
 );
@@ -60,7 +59,7 @@ CREATE TABLE IF NOT EXISTS categories (
   created_at TEXT DEFAULT (datetime('now'))
 );
 
--- Products (with dual-market pricing)
+-- Products (Euro-only pricing)
 CREATE TABLE IF NOT EXISTS products (
   id TEXT PRIMARY KEY,
   sku TEXT UNIQUE NOT NULL,
@@ -76,12 +75,16 @@ CREATE TABLE IF NOT EXISTS products (
   category_id TEXT REFERENCES categories(id),
   short_description TEXT,
   full_description TEXT,
+  overview TEXT,
+  history TEXT,
+  research_findings TEXT,
+  key_areas_json TEXT,
   mechanism_of_action TEXT,
   coa_url TEXT,
-  coa_batch_number TEXT,
-  coa_test_date TEXT,
   coa_lab TEXT,
   hplc_purity TEXT,
+  pubchem_id TEXT,
+  structure_image_url TEXT,
   status TEXT DEFAULT 'active' CHECK (status IN ('draft', 'active', 'out_of_stock', 'discontinued')),
   is_featured INTEGER DEFAULT 0,
   view_count INTEGER DEFAULT 0,
@@ -93,7 +96,7 @@ CREATE TABLE IF NOT EXISTS products (
 CREATE INDEX IF NOT EXISTS idx_products_status ON products(status);
 CREATE INDEX IF NOT EXISTS idx_products_code ON products(code_label);
 
--- Product Variants (market-specific pricing)
+-- Product Variants (Euro-only pricing)
 CREATE TABLE IF NOT EXISTS product_variants (
   id TEXT PRIMARY KEY,
   product_id TEXT NOT NULL REFERENCES products(id) ON DELETE CASCADE,
@@ -101,10 +104,9 @@ CREATE TABLE IF NOT EXISTS product_variants (
   sku TEXT UNIQUE NOT NULL,
   dosage_mg INTEGER,
   vial_count INTEGER DEFAULT 1,
-  price_za REAL NOT NULL,
-  price_de REAL NOT NULL,
-  compare_price_za REAL,
-  compare_price_de REAL,
+  price REAL NOT NULL,
+  compare_price REAL,
+  currency TEXT DEFAULT 'EUR' CHECK (currency IN ('ZAR', 'EUR')),
   is_default INTEGER DEFAULT 0,
   sort_order INTEGER DEFAULT 0,
   created_at TEXT DEFAULT (datetime('now'))
@@ -124,6 +126,19 @@ CREATE TABLE IF NOT EXISTS research_references (
   pmid TEXT,
   url TEXT,
   sort_order INTEGER DEFAULT 0
+);
+
+-- COA Batches (multiple per product)
+CREATE TABLE IF NOT EXISTS coa_batches (
+  id TEXT PRIMARY KEY,
+  product_id TEXT NOT NULL REFERENCES products(id) ON DELETE CASCADE,
+  batch_number TEXT NOT NULL,
+  test_type TEXT DEFAULT 'purity' CHECK (test_type IN ('purity', 'endotoxin', 'identity', 'quantity')),
+  test_date TEXT,
+  result_value TEXT,
+  pdf_url TEXT,
+  sort_order INTEGER DEFAULT 0,
+  created_at TEXT DEFAULT (datetime('now'))
 );
 
 -- Product Images
@@ -170,7 +185,7 @@ CREATE TABLE IF NOT EXISTS addresses (
   city TEXT NOT NULL,
   province TEXT,
   postal_code TEXT NOT NULL,
-  country TEXT DEFAULT 'ZA' CHECK (country IN ('ZA', 'DE')),
+  country TEXT DEFAULT 'DE' CHECK (country IN ('ZA', 'DE')),
   is_default INTEGER DEFAULT 0,
   created_at TEXT DEFAULT (datetime('now'))
 );
@@ -188,7 +203,7 @@ CREATE TABLE IF NOT EXISTS orders (
   tax REAL DEFAULT 0,
   discount REAL DEFAULT 0,
   total REAL NOT NULL,
-  currency TEXT DEFAULT 'ZAR' CHECK (currency IN ('ZAR', 'EUR')),
+  currency TEXT DEFAULT 'EUR' CHECK (currency IN ('ZAR', 'EUR')),
   shipping_address TEXT,
   shipping_method TEXT,
   tracking_number TEXT,

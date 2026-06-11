@@ -14,35 +14,34 @@ checkout.use('*', async (c, next) => {
   await next()
 })
 
-// Initiate checkout — returns payment URL
+// Initiate checkout — returns payment URL (Euro-only)
 checkout.post('/', async (c) => {
   const userId = c.get('userId')
   const { address, paymentMethod } = await c.req.json()
 
-  const user = await c.env.DB.prepare('SELECT market, phone FROM users WHERE id = ?').bind(userId).first()
-  const market = user?.market || 'ZA'
-  const currency = market === 'DE' ? 'EUR' : 'ZAR'
+  const user = await c.env.DB.prepare('SELECT phone FROM users WHERE id = ?').bind(userId).first()
+  const currency = 'EUR'
 
-  // Get cart items
+  // Get cart items with Euro pricing
   const { results: cartItems } = await c.env.DB.prepare(
     `SELECT ci.*, p.name as product_name, p.sku as product_sku,
-      CASE WHEN ? = 'DE' THEN pv.price_de ELSE pv.price_za END as unit_price
+      pv.price as unit_price
      FROM cart_items ci
      JOIN products p ON p.id = ci.product_id
      LEFT JOIN product_variants pv ON pv.id = ci.variant_id
      WHERE ci.user_id = ?`
-  ).bind(market, userId).all()
+  ).bind(userId).all()
 
   if (!cartItems || cartItems.length === 0) {
     return c.json({ error: 'Cart is empty' }, 400)
   }
 
-  // Calculate totals
+  // Calculate totals (Euro thresholds)
   let subtotal = 0
   for (const item of cartItems) {
     subtotal += (item.unit_price || 0) * item.quantity
   }
-  const shippingCost = subtotal > (market === 'DE' ? 300 : 5000) ? 0 : (market === 'DE' ? 15 : 150)
+  const shippingCost = subtotal > 300 ? 0 : 15  // Free shipping over €300, else €15
   const total = subtotal + shippingCost
 
   // Generate order
@@ -69,25 +68,10 @@ checkout.post('/', async (c) => {
   // Clear cart
   await c.env.DB.prepare('DELETE FROM cart_items WHERE user_id = ?').bind(userId).run()
 
-  // Generate payment URL based on method
+  // Generate payment URL based on method (Euro market)
   let paymentUrl: string | null = null
 
-  if (paymentMethod === 'payfast' && market === 'ZA') {
-    // PayFast integration
-    const payfastData = {
-      merchant_id: c.env.PAYFAST_MERCHANT_ID,
-      merchant_key: c.env.PAYFAST_MERCHANT_KEY,
-      return_url: `https://ridethetide.site/order/success/${orderId}`,
-      cancel_url: `https://ridethetide.site/order/cancel/${orderId}`,
-      notify_url: `https://api.ridethetide.site/api/webhook/payfast`,
-      m_payment_id: orderId,
-      amount: total.toFixed(2),
-      item_name: `Order ${orderNumber}`,
-      email_address: 'customer@ridethetide.site',
-    }
-    const params = new URLSearchParams(payfastData as any)
-    paymentUrl = `https://www.payfast.co.za/eng/process?${params.toString()}`
-  } else if (paymentMethod === 'stripe' && market === 'DE') {
+  if (paymentMethod === 'stripe') {
     // Stripe integration placeholder
     paymentUrl = `https://ridethetide.site/order/${orderId}?stripe=pending`
   } else if (paymentMethod === 'nowpayments') {

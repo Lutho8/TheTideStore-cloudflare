@@ -3,7 +3,6 @@ export interface User {
   phone: string
   name: string | null
   email: string | null
-  market: 'ZA' | 'DE'
   phoneVerified: boolean
   createdAt: string
 }
@@ -30,6 +29,10 @@ export interface Product {
   purity: string | null
   shortDescription: string
   fullDescription: string
+  overview: string | null
+  history: string | null
+  researchFindings: string | null
+  keyAreasJson: string | null
   mechanismOfAction: string
   basePrice: number
   comparePrice: number | null
@@ -38,10 +41,12 @@ export interface Product {
   images: ProductImage[]
   variants: ProductVariant[]
   references: ResearchReference[]
+  coaBatches: CoaBatch[]
   coaUrl: string | null
-  coaBatchNumber: string | null
   coaLab: string | null
   hplcPurity: string | null
+  pubchemId: string | null
+  structureImageUrl: string | null
 }
 
 export interface ProductVariant {
@@ -70,6 +75,15 @@ export interface ResearchReference {
   year: number | null
   doi: string | null
   pmid: string | null
+}
+
+export interface CoaBatch {
+  id: string
+  batchNumber: string
+  testType: string
+  testDate: string | null
+  resultValue: string | null
+  pdfUrl: string | null
 }
 
 export interface Order {
@@ -102,16 +116,13 @@ export interface Address {
   city: string
   province: string | null
   postalCode: string
-  country: 'ZA' | 'DE'
+  country: string
   isDefault: boolean
 }
 
-export type PaymentMethod = 'payfast' | 'stripe' | 'nowpayments'
+export type PaymentMethod = 'stripe' | 'nowpayments'
 
 export type ShippingMethod = 
-  | 'courier-gauteng'
-  | 'courier-wc'
-  | 'overnight-national'
-  | 'standard-national'
   | 'dhl-germany'
   | 'dpd-germany'
+  | 'standard-eu'
