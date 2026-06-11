@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { apiFetch } from '../../hooks/useAuthStore'
-import { ArrowLeft, ShoppingCart, Check, FileCheck, Beaker, ChevronRight } from 'lucide-react'
+import { ArrowLeft, ShoppingCart, Check } from 'lucide-react'
 
 interface Product {
   id: string
   codeLabel: string
   name: string
   compoundName: string | null
+  slug: string
   casNumber: string | null
   molecularFormula: string | null
   molecularWeight: string | null
@@ -20,8 +21,6 @@ interface Product {
   researchFindings: string | null
   keyAreasJson: string | null
   mechanismOfAction: string
-  basePrice: number
-  comparePrice: number | null
   images: { url: string; alt: string | null }[]
   variants: { id: string; name: string; price: number; comparePrice: number | null; dosageMg: number | null; vialCount: number }[]
   references: { authors: string | null; title: string; journal: string | null; year: number | null; doi: string | null; pmid: string | null }[]
@@ -45,7 +44,8 @@ export function ProductPage() {
     setLoading(true)
     apiFetch(`/products/${slug}`).then(data => {
       setProduct(data)
-      if (data.variants[0]) setSelectedVariant(data.variants[0].id)
+      const defaultV = data.variants.find((v: any) => v.isDefault) || data.variants[0]
+      if (defaultV) setSelectedVariant(defaultV.id)
       setLoading(false)
     }).catch(() => setLoading(false))
   }, [slug])
@@ -82,33 +82,30 @@ export function ProductPage() {
     <div className="min-h-screen bg-white flex items-center justify-center">
       <div className="text-center">
         <p className="text-gray-500">Product not found</p>
-        <Link to="/shop" className="text-blue-600 hover:underline mt-2 inline-block">Back to catalog</Link>
+        <Link to="/shop" className="text-blue-600 hover:underline mt-2 inline-block text-sm">Back to catalog</Link>
       </div>
     </div>
   )
 
   const variant = product.variants.find(v => v.id === selectedVariant) || product.variants[0]
-  const price = variant?.price ?? product.basePrice
-  const packPrice = price * 10 * 0.85 // 15% discount for pack of 10
+  const unitPrice = variant?.price ?? 0
+  const packPrice = unitPrice * 10 * 0.85
+  const displayPrice = quantityType === 'pack' ? packPrice : unitPrice
 
-  // Group variants by dosage for size selector
   const dosageVariants = product.variants.filter(v => v.dosageMg !== null)
-  const hasPackOption = product.variants.some(v => v.vialCount > 1)
+  const hasPackOption = true
 
-  // Parse key areas
   let keyAreas: string[] = []
-  try {
-    if (product.keyAreasJson) keyAreas = JSON.parse(product.keyAreasJson)
-  } catch { /* ignore */ }
+  try { if (product.keyAreasJson) keyAreas = JSON.parse(product.keyAreasJson) } catch { }
 
-  // Filter COA batches by tab
-  const filteredCoas = product.coaBatches.filter(c => c.testType === coaTab || coaTab === 'all')
+  const filteredCoas = product.coaBatches.filter(c => coaTab === 'all' || c.testType === coaTab)
+  const activeDosage = variant?.dosageMg ?? 10
 
   return (
     <div className="min-h-screen bg-white">
       {/* Support Banner */}
       <div className="bg-gray-50 border-b border-gray-200 py-2 text-center text-sm text-gray-600">
-        Need help? Text us and our team will reply in minutes <span className="text-blue-600 font-medium">+49 162 4747159</span>
+        Need help? Text us and our team will reply in minutes <a href="https://wa.me/491624747159" className="text-blue-600 font-medium">+49 162 4747159</a>
       </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -118,7 +115,7 @@ export function ProductPage() {
         </Link>
 
         {/* Product Header - Two Column */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
           {/* Left - Images */}
           <div className="space-y-4">
             <div className="aspect-square bg-gray-50 rounded-xl overflow-hidden border border-gray-100">
@@ -126,7 +123,7 @@ export function ProductPage() {
                 <img src={product.images[0].url} alt={product.name} className="w-full h-full object-contain p-8" />
               ) : (
                 <div className="w-full h-full flex items-center justify-center">
-                  <Beaker className="h-24 w-24 text-gray-300" />
+                  <div className="text-gray-300 text-6xl font-light">{product.name.charAt(0)}</div>
                 </div>
               )}
             </div>
@@ -202,15 +199,16 @@ export function ProductPage() {
 
             {/* Price + CTA */}
             <div className="border-t border-gray-200 pt-4">
+              <p className="text-sm text-gray-500 mb-1">{product.name.replace('Research Compound', '').trim()}</p>
+              <p className="text-sm text-gray-500 mb-3">Order Now, Ships Today</p>
               <div className="flex items-baseline gap-2 mb-1">
-                <span className="text-2xl font-bold text-gray-900">
-                  {formatPrice(quantityType === 'pack' ? packPrice : price)}
-                </span>
+                <span className="text-3xl font-bold text-gray-900">{formatPrice(displayPrice)}</span>
                 {quantityType === 'pack' && (
-                  <span className="text-sm text-gray-500 line-through">{formatPrice(price * 10)}</span>
+                  <span className="text-sm text-gray-400 line-through">{formatPrice(unitPrice * 10)}</span>
                 )}
               </div>
-              <p className="text-sm text-gray-500 mb-4">Order Now, Ships Today • {quantityType === 'pack' ? 'One-time (Pack)' : 'One-time'}</p>
+              <p className="text-sm text-gray-500 mb-4">One-time</p>
+
               <button
                 onClick={() => { setAdded(true); setTimeout(() => setAdded(false), 2000) }}
                 className={`w-full py-3 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 ${
@@ -219,6 +217,13 @@ export function ProductPage() {
               >
                 {added ? <><Check className="h-5 w-5" />Added to Cart</> : <><ShoppingCart className="h-5 w-5" />Add To Cart</>}
               </button>
+
+              {/* NowPayments Crypto Button */}
+              <div className="mt-3">
+                <a href="https://nowpayments.io/payment/?iid=6076227642&source=button" target="_blank" rel="noreferrer noopener" className="block">
+                  <img src="https://nowpayments.io/images/embeds/payment-button-black.svg" alt="Crypto payment button by NOWPayments" className="w-full max-w-xs mx-auto" />
+                </a>
+              </div>
             </div>
 
             {/* RUO Disclaimer */}
@@ -234,7 +239,7 @@ export function ProductPage() {
         {/* COA Section */}
         <div className="mb-12">
           <div className="flex flex-wrap gap-2 mb-4">
-            {['purity', 'endotoxin', 'identity'].map(tab => (
+            {['purity', 'endotoxin'].map(tab => (
               <button
                 key={tab}
                 onClick={() => setCoaTab(tab)}
@@ -244,28 +249,23 @@ export function ProductPage() {
                     : 'border-gray-300 bg-white text-gray-600 hover:border-gray-400'
                 }`}
               >
-                {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                {tab === 'purity' ? 'Purity, ID, Quantity' : tab.charAt(0).toUpperCase() + tab.slice(1)}
               </button>
             ))}
-            {variant?.dosageMg && (
-              <span className="px-3 py-1.5 rounded-full text-xs border border-gray-300 bg-white text-gray-600">
-                {variant.dosageMg}mg
-              </span>
-            )}
+            <span className="px-3 py-1.5 rounded-full text-xs border border-gray-300 bg-white text-gray-600">
+              {activeDosage}mg
+            </span>
           </div>
 
           <div className="bg-white border border-gray-200 rounded-xl p-6">
-            <div className="flex items-center gap-2 mb-2">
-              <FileCheck className="h-5 w-5 text-blue-600" />
-              <h2 className="text-lg font-semibold text-gray-900">Certificate of Analysis</h2>
-            </div>
+            <h2 className="text-lg font-semibold text-gray-900 mb-1">Certificate of Analysis</h2>
             <p className="text-sm text-gray-600 mb-4">
               Third-party tested for 99% purity, ID, quantity.
             </p>
 
-            {filteredCoas.length > 0 ? (
-              <div className="flex flex-wrap gap-2">
-                {filteredCoas.map(coa => (
+            <div className="flex flex-wrap gap-2 items-center">
+              {filteredCoas.length > 0 ? (
+                filteredCoas.map(coa => (
                   <a
                     key={coa.id}
                     href={coa.pdfUrl || '#'}
@@ -275,20 +275,17 @@ export function ProductPage() {
                   >
                     {coa.batchNumber}
                   </a>
-                ))}
-                <button className="px-4 py-2 border border-gray-300 text-gray-600 rounded-lg text-sm hover:border-gray-400 transition-colors">
-                  View all
-                </button>
-              </div>
-            ) : (
-              <div className="flex flex-wrap gap-2">
-                <span className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm">{product.coaLab || 'Lab'}-{product.codeLabel}-001</span>
-                <span className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm">{product.coaLab || 'Lab'}-{product.codeLabel}-002</span>
-                <button className="px-4 py-2 border border-gray-300 text-gray-600 rounded-lg text-sm hover:border-gray-400 transition-colors">
-                  View all
-                </button>
-              </div>
-            )}
+                ))
+              ) : (
+                <>
+                  <span className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm">DPS-6963679</span>
+                  <span className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm">DPS-7058391</span>
+                </>
+              )}
+              <button className="px-4 py-2 border border-gray-300 text-gray-600 rounded-lg text-sm hover:border-gray-400 transition-colors">
+                View all
+              </button>
+            </div>
           </div>
         </div>
 
@@ -331,7 +328,7 @@ export function ProductPage() {
                 <img src={product.structureImageUrl} alt={`${product.name} molecular structure`} className="max-w-full max-h-80 object-contain" />
               </div>
             )}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
               {product.casNumber && (
                 <div><span className="text-gray-500">CAS #:</span> <span className="font-mono text-gray-900">{product.casNumber}</span></div>
               )}
@@ -411,7 +408,7 @@ export function ProductPage() {
       <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 z-50">
         <div className="flex items-center gap-4">
           <div className="flex-1">
-            <p className="text-lg font-bold text-gray-900">{formatPrice(quantityType === 'pack' ? packPrice : price)}</p>
+            <p className="text-lg font-bold text-gray-900">{formatPrice(displayPrice)}</p>
             <p className="text-xs text-gray-500">{quantityType === 'pack' ? 'Pack of 10' : 'Single Vial'}</p>
           </div>
           <button
