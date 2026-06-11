@@ -1,0 +1,15 @@
+{
+  "name": "thetide-cloudflare",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"cd worker && wrangler dev\" \"cd frontend && npm run dev\"",
+    "build": "cd frontend && npm run build",
+    "deploy": "cd worker && wrangler deploy && cd ../frontend && wrangler pages deploy dist",
+    "db:schema": "cd worker && wrangler d1 execute thetide-db --file=../database/schema.sql",
+    "db:seed": "cd worker && wrangler d1 execute thetide-db --file=../database/seed.sql"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

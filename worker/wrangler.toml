@@ -1,0 +1,39 @@
+name = "thetide-api"
+main = "src/index.ts"
+compatibility_date = "2024-05-29"
+
+# D1 Database
+[[d1_databases]]
+binding = "DB"
+database_name = "thetide-db"
+database_id = "REPLACE_WITH_YOUR_D1_ID"
+
+# R2 Storage (for COA PDFs and images)
+[[r2_buckets]]
+binding = "COAS"
+bucket_name = "thetide-coas"
+
+[[r2_buckets]]
+binding = "IMAGES"
+bucket_name = "thetide-images"
+
+# KV for sessions and rate limiting
+[[kv_namespaces]]
+binding = "SESSIONS"
+id = "REPLACE_WITH_YOUR_KV_ID"
+
+# Environment variables
+[vars]
+JWT_SECRET = "change-this-in-production-min-32-chars"
+WHATSAPP_API_KEY = ""
+WHATSAPP_PHONE_ID = ""
+TWILIO_SID = ""
+TWILIO_TOKEN = ""
+TWILIO_PHONE = ""
+PAYFAST_MERCHANT_ID = ""
+PAYFAST_MERCHANT_KEY = ""
+STRIPE_SECRET_KEY = ""
+NOWPAYMENTS_API_KEY = ""
+
+# Secrets (use `wrangler secret put` for these)
+# [env.production.vars]
