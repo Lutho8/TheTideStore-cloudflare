@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Ride The Tide — Logo Overlay Script for Vial Images
-Overlays the RTT wave logo onto all crushresearch product images.
+Overlays the RTT wave logo onto all product images.
 
 Usage:
   python scripts/overlay_logo.py
