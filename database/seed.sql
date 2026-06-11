@@ -21,7 +21,8 @@ INSERT OR IGNORE INTO product_variants (id, product_id, name, sku, dosage_mg, vi
 ('var-bpc157-10', 'prod-bpc157', '10mg × 1 vial', 'RT-BPC157-10MG-1', 10, 1, 54.28, NULL, 'EUR', 1, 2);
 
 INSERT OR IGNORE INTO product_images (id, product_id, url, alt, sort_order, is_primary) VALUES
-('img-bpc157', 'prod-bpc157', 'https://r2.ridethetide.site/products/bpc-157.png', 'BPC-157 research vial', 1, 1);
+('img-bpc157', 'prod-bpc157', 'https://r2.ridethetide.site/products/bpc-157.png', 'BPC-157 research vial', 1, 1),
+('img-bpc157-box', 'prod-bpc157', 'https://r2.ridethetide.site/products/bpc-157-box.png', 'BPC-157 packaging box', 2, 0);
 
 -- 2. BPC-157 + TB-500 Blend
 INSERT OR IGNORE INTO products (id, sku, code_label, name, compound_name, slug, cas_number, molecular_formula, molecular_weight, sequence, purity, category_id, short_description, full_description, overview, history, research_findings, key_areas_json, mechanism_of_action, coa_lab, hplc_purity, pubchem_id, structure_image_url, status, is_featured) VALUES
@@ -32,7 +33,8 @@ INSERT OR IGNORE INTO product_variants (id, product_id, name, sku, dosage_mg, vi
 ('var-bpctb-20', 'prod-bpctb', '20mg blend × 1 vial', 'RT-BPCTB-20MG-1', 20, 1, 118.68, NULL, 'EUR', 0, 2);
 
 INSERT OR IGNORE INTO product_images (id, product_id, url, alt, sort_order, is_primary) VALUES
-('img-bpctb', 'prod-bpctb', 'https://r2.ridethetide.site/products/bpc-157-tb-500.png', 'BPC-157 + TB-500 blend vial', 1, 1);
+('img-bpctb', 'prod-bpctb', 'https://r2.ridethetide.site/products/bpc-157-tb-500.png', 'BPC-157 + TB-500 blend vial', 1, 1),
+('img-bpctb-box', 'prod-bpctb', 'https://r2.ridethetide.site/products/bpc-157-tb-500-box.png', 'BPC-157 + TB-500 packaging box', 2, 0);
 
 -- 3. CJC-1295 + Ipamorelin Blend
 INSERT OR IGNORE INTO products (id, sku, code_label, name, compound_name, slug, cas_number, molecular_formula, molecular_weight, sequence, purity, category_id, short_description, full_description, overview, history, research_findings, key_areas_json, mechanism_of_action, coa_lab, hplc_purity, pubchem_id, structure_image_url, status, is_featured) VALUES
@@ -42,7 +44,8 @@ INSERT OR IGNORE INTO product_variants (id, product_id, name, sku, dosage_mg, vi
 ('var-cjcipa-10', 'prod-cjcipa', '10mg blend × 1 vial', 'RT-CJCIPA-10MG-1', 10, 1, 72.68, NULL, 'EUR', 1, 1);
 
 INSERT OR IGNORE INTO product_images (id, product_id, url, alt, sort_order, is_primary) VALUES
-('img-cjcipa', 'prod-cjcipa', 'https://r2.ridethetide.site/products/cjc-1295-ipamorelin.png', 'CJC-1295 + Ipamorelin blend vial', 1, 1);
+('img-cjcipa', 'prod-cjcipa', 'https://r2.ridethetide.site/products/cjc-1295-ipamorelin.png', 'CJC-1295 + Ipamorelin blend vial', 1, 1),
+('img-cjcipa-box', 'prod-cjcipa', 'https://r2.ridethetide.site/products/cjc-1295-ipamorelin-box.png', 'CJC-1295 + Ipamorelin packaging box', 2, 0);
 
 -- 4. DP3-R (Retatrutide)
 INSERT OR IGNORE INTO products (id, sku, code_label, name, compound_name, slug, cas_number, molecular_formula, molecular_weight, sequence, purity, category_id, short_description, full_description, overview, history, research_findings, key_areas_json, mechanism_of_action, coa_lab, hplc_purity, pubchem_id, structure_image_url, status, is_featured) VALUES
@@ -55,7 +58,8 @@ INSERT OR IGNORE INTO product_variants (id, product_id, name, sku, dosage_mg, vi
 ('var-dp3r-30', 'prod-dp3r', '30mg × 1 vial', 'RT-DP3R-30MG-1', 30, 1, 293.48, NULL, 'EUR', 0, 4);
 
 INSERT OR IGNORE INTO product_images (id, product_id, url, alt, sort_order, is_primary) VALUES
-('img-dp3r', 'prod-dp3r', 'https://r2.ridethetide.site/products/dp3-r.png', 'DP3-R research vial', 1, 1);
+('img-dp3r', 'prod-dp3r', 'https://r2.ridethetide.site/products/dp3-r.png', 'DP3-R research vial', 1, 1),
+('img-dp3r-box', 'prod-dp3r', 'https://r2.ridethetide.site/products/dp3-r-box.png', 'DP3-R packaging box', 2, 0);
 
 -- 5. DP2-T (Tirzepatide)
 INSERT OR IGNORE INTO products (id, sku, code_label, name, compound_name, slug, cas_number, molecular_formula, molecular_weight, sequence, purity, category_id, short_description, full_description, overview, history, research_findings, key_areas_json, mechanism_of_action, coa_lab, hplc_purity, pubchem_id, structure_image_url, status, is_featured) VALUES
@@ -67,7 +71,8 @@ INSERT OR IGNORE INTO product_variants (id, product_id, name, sku, dosage_mg, vi
 ('var-dp2t-30', 'prod-dp2t', '30mg × 1 vial', 'RT-DP2T-30MG-1', 30, 1, 155.48, NULL, 'EUR', 0, 3);
 
 INSERT OR IGNORE INTO product_images (id, product_id, url, alt, sort_order, is_primary) VALUES
-('img-dp2t', 'prod-dp2t', 'https://r2.ridethetide.site/products/dp2-t.png', 'DP2-T research vial', 1, 1);
+('img-dp2t', 'prod-dp2t', 'https://r2.ridethetide.site/products/dp2-t.png', 'DP2-T research vial', 1, 1),
+('img-dp2t-box', 'prod-dp2t', 'https://r2.ridethetide.site/products/dp2-t-box.png', 'DP2-T packaging box', 2, 0);
 
 -- 6. TB-500
 INSERT OR IGNORE INTO products (id, sku, code_label, name, compound_name, slug, cas_number, molecular_formula, molecular_weight, sequence, purity, category_id, short_description, full_description, overview, history, research_findings, key_areas_json, mechanism_of_action, coa_lab, hplc_purity, pubchem_id, structure_image_url, status, is_featured) VALUES
@@ -78,7 +83,8 @@ INSERT OR IGNORE INTO product_variants (id, product_id, name, sku, dosage_mg, vi
 ('var-tb500-10', 'prod-tb500', '10mg × 1 vial', 'RT-TB500-10MG-1', 10, 1, 72.68, NULL, 'EUR', 0, 2);
 
 INSERT OR IGNORE INTO product_images (id, product_id, url, alt, sort_order, is_primary) VALUES
-('img-tb500', 'prod-tb500', 'https://r2.ridethetide.site/products/tb-500.png', 'TB-500 research vial', 1, 1);
+('img-tb500', 'prod-tb500', 'https://r2.ridethetide.site/products/tb-500.png', 'TB-500 research vial', 1, 1),
+('img-tb500-box', 'prod-tb500', 'https://r2.ridethetide.site/products/tb-500-box.png', 'TB-500 packaging box', 2, 0);
 
 -- 7. Tesamorelin
 INSERT OR IGNORE INTO products (id, sku, code_label, name, compound_name, slug, cas_number, molecular_formula, molecular_weight, sequence, purity, category_id, short_description, full_description, overview, history, research_findings, key_areas_json, mechanism_of_action, coa_lab, hplc_purity, pubchem_id, structure_image_url, status, is_featured) VALUES
@@ -88,7 +94,8 @@ INSERT OR IGNORE INTO product_variants (id, product_id, name, sku, dosage_mg, vi
 ('var-tesa-10', 'prod-tesa', '10mg × 1 vial', 'RT-TESA-10MG-1', 10, 1, 109.48, NULL, 'EUR', 1, 1);
 
 INSERT OR IGNORE INTO product_images (id, product_id, url, alt, sort_order, is_primary) VALUES
-('img-tesa', 'prod-tesa', 'https://r2.ridethetide.site/products/tesamorelin.png', 'Tesamorelin research vial', 1, 1);
+('img-tesa', 'prod-tesa', 'https://r2.ridethetide.site/products/tesamorelin.png', 'Tesamorelin research vial', 1, 1),
+('img-tesa-box', 'prod-tesa', 'https://r2.ridethetide.site/products/tesamorelin-box.png', 'Tesamorelin packaging box', 2, 0);
 
 -- 8. Sermorelin
 INSERT OR IGNORE INTO products (id, sku, code_label, name, compound_name, slug, cas_number, molecular_formula, molecular_weight, sequence, purity, category_id, short_description, full_description, overview, history, research_findings, key_areas_json, mechanism_of_action, coa_lab, hplc_purity, pubchem_id, structure_image_url, status, is_featured) VALUES
@@ -99,7 +106,8 @@ INSERT OR IGNORE INTO product_variants (id, product_id, name, sku, dosage_mg, vi
 ('var-serm-10', 'prod-serm', '10mg × 1 vial', 'RT-SERM-10MG-1', 10, 1, 72.68, NULL, 'EUR', 0, 2);
 
 INSERT OR IGNORE INTO product_images (id, product_id, url, alt, sort_order, is_primary) VALUES
-('img-serm', 'prod-serm', 'https://r2.ridethetide.site/products/sermorelin.png', 'Sermorelin research vial', 1, 1);
+('img-serm', 'prod-serm', 'https://r2.ridethetide.site/products/sermorelin.png', 'Sermorelin research vial', 1, 1),
+('img-serm-box', 'prod-serm', 'https://r2.ridethetide.site/products/sermorelin-box.png', 'Sermorelin packaging box', 2, 0);
 
 -- 9. Ipamorelin
 INSERT OR IGNORE INTO products (id, sku, code_label, name, compound_name, slug, cas_number, molecular_formula, molecular_weight, sequence, purity, category_id, short_description, full_description, overview, history, research_findings, key_areas_json, mechanism_of_action, coa_lab, hplc_purity, pubchem_id, structure_image_url, status, is_featured) VALUES
@@ -110,7 +118,8 @@ INSERT OR IGNORE INTO product_variants (id, product_id, name, sku, dosage_mg, vi
 ('var-ipa-10', 'prod-ipa', '10mg × 1 vial', 'RT-IPA-10MG-1', 10, 1, 72.68, NULL, 'EUR', 0, 2);
 
 INSERT OR IGNORE INTO product_images (id, product_id, url, alt, sort_order, is_primary) VALUES
-('img-ipa', 'prod-ipa', 'https://r2.ridethetide.site/products/ipamorelin.png', 'Ipamorelin research vial', 1, 1);
+('img-ipa', 'prod-ipa', 'https://r2.ridethetide.site/products/ipamorelin.png', 'Ipamorelin research vial', 1, 1),
+('img-ipa-box', 'prod-ipa', 'https://r2.ridethetide.site/products/ipamorelin-box.png', 'Ipamorelin packaging box', 2, 0);
 
 -- 10. MOTS-c
 INSERT OR IGNORE INTO products (id, sku, code_label, name, compound_name, slug, cas_number, molecular_formula, molecular_weight, sequence, purity, category_id, short_description, full_description, overview, history, research_findings, key_areas_json, mechanism_of_action, coa_lab, hplc_purity, pubchem_id, structure_image_url, status, is_featured) VALUES
@@ -121,7 +130,8 @@ INSERT OR IGNORE INTO product_variants (id, product_id, name, sku, dosage_mg, vi
 ('var-mots-10', 'prod-mots', '10mg × 1 vial', 'RT-MOTS-10MG-1', 10, 1, 45.08, NULL, 'EUR', 1, 2);
 
 INSERT OR IGNORE INTO product_images (id, product_id, url, alt, sort_order, is_primary) VALUES
-('img-mots', 'prod-mots', 'https://r2.ridethetide.site/products/mots-c.png', 'MOTS-c research vial', 1, 1);
+('img-mots', 'prod-mots', 'https://r2.ridethetide.site/products/mots-c.png', 'MOTS-c research vial', 1, 1),
+('img-mots-box', 'prod-mots', 'https://r2.ridethetide.site/products/mots-c-box.png', 'MOTS-c packaging box', 2, 0);
 
 -- 11. NAD+
 INSERT OR IGNORE INTO products (id, sku, code_label, name, compound_name, slug, cas_number, molecular_formula, molecular_weight, sequence, purity, category_id, short_description, full_description, overview, history, research_findings, key_areas_json, mechanism_of_action, coa_lab, hplc_purity, pubchem_id, structure_image_url, status, is_featured) VALUES
@@ -132,7 +142,8 @@ INSERT OR IGNORE INTO product_variants (id, product_id, name, sku, dosage_mg, vi
 ('var-nad-500', 'prod-nad', '500mg × 1 vial', 'RT-NAD-500MG-1', 500, 1, 72.68, NULL, 'EUR', 1, 2);
 
 INSERT OR IGNORE INTO product_images (id, product_id, url, alt, sort_order, is_primary) VALUES
-('img-nad', 'prod-nad', 'https://r2.ridethetide.site/products/nad-plus.png', 'NAD+ research vial', 1, 1);
+('img-nad', 'prod-nad', 'https://r2.ridethetide.site/products/nad-plus.png', 'NAD+ research vial', 1, 1),
+('img-nad-box', 'prod-nad', 'https://r2.ridethetide.site/products/nad-plus-box.png', 'NAD+ packaging box', 2, 0);
 
 -- 12. L-Glutathione
 INSERT OR IGNORE INTO products (id, sku, code_label, name, compound_name, slug, cas_number, molecular_formula, molecular_weight, sequence, purity, category_id, short_description, full_description, overview, history, research_findings, key_areas_json, mechanism_of_action, coa_lab, hplc_purity, pubchem_id, structure_image_url, status, is_featured) VALUES
@@ -142,7 +153,8 @@ INSERT OR IGNORE INTO product_variants (id, product_id, name, sku, dosage_mg, vi
 ('var-glu-1500', 'prod-glu', '1500mg × 1 vial', 'RT-GLU-1500MG-1', 1500, 1, 35.88, NULL, 'EUR', 1, 1);
 
 INSERT OR IGNORE INTO product_images (id, product_id, url, alt, sort_order, is_primary) VALUES
-('img-glu', 'prod-glu', 'https://r2.ridethetide.site/products/l-glutathione.png', 'L-Glutathione research vial', 1, 1);
+('img-glu', 'prod-glu', 'https://r2.ridethetide.site/products/l-glutathione.png', 'L-Glutathione research vial', 1, 1),
+('img-glu-box', 'prod-glu', 'https://r2.ridethetide.site/products/l-glutathione-box.png', 'L-Glutathione packaging box', 2, 0);
 
 -- 13. AOD-9604
 INSERT OR IGNORE INTO products (id, sku, code_label, name, compound_name, slug, cas_number, molecular_formula, molecular_weight, sequence, purity, category_id, short_description, full_description, overview, history, research_findings, key_areas_json, mechanism_of_action, coa_lab, hplc_purity, pubchem_id, structure_image_url, status, is_featured) VALUES
@@ -152,7 +164,8 @@ INSERT OR IGNORE INTO product_variants (id, product_id, name, sku, dosage_mg, vi
 ('var-aod-5', 'prod-aod', '5mg × 1 vial', 'RT-AOD-5MG-1', 5, 1, 45.08, NULL, 'EUR', 1, 1);
 
 INSERT OR IGNORE INTO product_images (id, product_id, url, alt, sort_order, is_primary) VALUES
-('img-aod', 'prod-aod', 'https://r2.ridethetide.site/products/aod-9604.png', 'AOD-9604 research vial', 1, 1);
+('img-aod', 'prod-aod', 'https://r2.ridethetide.site/products/aod-9604.png', 'AOD-9604 research vial', 1, 1),
+('img-aod-box', 'prod-aod', 'https://r2.ridethetide.site/products/aod-9604-box.png', 'AOD-9604 packaging box', 2, 0);
 
 -- 14. DP1-S (Semaglutide)
 INSERT OR IGNORE INTO products (id, sku, code_label, name, compound_name, slug, cas_number, molecular_formula, molecular_weight, sequence, purity, category_id, short_description, full_description, overview, history, research_findings, key_areas_json, mechanism_of_action, coa_lab, hplc_purity, pubchem_id, structure_image_url, status, is_featured) VALUES
@@ -163,7 +176,8 @@ INSERT OR IGNORE INTO product_variants (id, product_id, name, sku, dosage_mg, vi
 ('var-dp1s-10', 'prod-dp1s', '10mg × 1 vial', 'RT-DP1S-10MG-1', 10, 1, 118.68, NULL, 'EUR', 0, 2);
 
 INSERT OR IGNORE INTO product_images (id, product_id, url, alt, sort_order, is_primary) VALUES
-('img-dp1s', 'prod-dp1s', 'https://r2.ridethetide.site/products/dp1-s.png', 'DP1-S research vial', 1, 1);
+('img-dp1s', 'prod-dp1s', 'https://r2.ridethetide.site/products/dp1-s.png', 'DP1-S research vial', 1, 1),
+('img-dp1s-box', 'prod-dp1s', 'https://r2.ridethetide.site/products/dp1-s-box.png', 'DP1-S packaging box', 2, 0);
 
 -- 15. GHK-Cu
 INSERT OR IGNORE INTO products (id, sku, code_label, name, compound_name, slug, cas_number, molecular_formula, molecular_weight, sequence, purity, category_id, short_description, full_description, overview, history, research_findings, key_areas_json, mechanism_of_action, coa_lab, hplc_purity, pubchem_id, structure_image_url, status, is_featured) VALUES
@@ -174,7 +188,8 @@ INSERT OR IGNORE INTO product_variants (id, product_id, name, sku, dosage_mg, vi
 ('var-ghk-100', 'prod-ghk', '100mg × 1 vial', 'RT-GHK-100MG-1', 100, 1, 54.28, NULL, 'EUR', 0, 2);
 
 INSERT OR IGNORE INTO product_images (id, product_id, url, alt, sort_order, is_primary) VALUES
-('img-ghk', 'prod-ghk', 'https://r2.ridethetide.site/products/ghk-cu.png', 'GHK-Cu research vial', 1, 1);
+('img-ghk', 'prod-ghk', 'https://r2.ridethetide.site/products/ghk-cu.png', 'GHK-Cu research vial', 1, 1),
+('img-ghk-box', 'prod-ghk', 'https://r2.ridethetide.site/products/ghk-cu-box.png', 'GHK-Cu packaging box', 2, 0);
 
 -- 16. GLOW (GHK-Cu + BPC-157 + TB-500)
 INSERT OR IGNORE INTO products (id, sku, code_label, name, compound_name, slug, cas_number, molecular_formula, molecular_weight, sequence, purity, category_id, short_description, full_description, overview, history, research_findings, key_areas_json, mechanism_of_action, coa_lab, hplc_purity, pubchem_id, structure_image_url, status, is_featured) VALUES
@@ -184,7 +199,8 @@ INSERT OR IGNORE INTO product_variants (id, product_id, name, sku, dosage_mg, vi
 ('var-glow-70', 'prod-glow', '70mg blend × 1 vial', 'RT-GLOW-70MG-1', 70, 1, 127.88, NULL, 'EUR', 1, 1);
 
 INSERT OR IGNORE INTO product_images (id, product_id, url, alt, sort_order, is_primary) VALUES
-('img-glow', 'prod-glow', 'https://r2.ridethetide.site/products/glow.png', 'GLOW blend vial', 1, 1);
+('img-glow', 'prod-glow', 'https://r2.ridethetide.site/products/glow.png', 'GLOW blend vial', 1, 1),
+('img-glow-box', 'prod-glow', 'https://r2.ridethetide.site/products/glow-box.png', 'GLOW packaging box', 2, 0);
 
 -- 17. KLOW
 INSERT OR IGNORE INTO products (id, sku, code_label, name, compound_name, slug, cas_number, molecular_formula, molecular_weight, sequence, purity, category_id, short_description, full_description, overview, history, research_findings, key_areas_json, mechanism_of_action, coa_lab, hplc_purity, pubchem_id, structure_image_url, status, is_featured) VALUES
@@ -194,7 +210,8 @@ INSERT OR IGNORE INTO product_variants (id, product_id, name, sku, dosage_mg, vi
 ('var-klow-80', 'prod-klow', '80mg blend × 1 vial', 'RT-KLOW-80MG-1', 80, 1, 91.88, NULL, 'EUR', 1, 1);
 
 INSERT OR IGNORE INTO product_images (id, product_id, url, alt, sort_order, is_primary) VALUES
-('img-klow', 'prod-klow', 'https://r2.ridethetide.site/products/klow.png', 'KLOW blend vial', 1, 1);
+('img-klow', 'prod-klow', 'https://r2.ridethetide.site/products/klow.png', 'KLOW blend vial', 1, 1),
+('img-klow-box', 'prod-klow', 'https://r2.ridethetide.site/products/klow-box.png', 'KLOW packaging box', 2, 0);
 
 -- 18. KPV
 INSERT OR IGNORE INTO products (id, sku, code_label, name, compound_name, slug, cas_number, molecular_formula, molecular_weight, sequence, purity, category_id, short_description, full_description, overview, history, research_findings, key_areas_json, mechanism_of_action, coa_lab, hplc_purity, pubchem_id, structure_image_url, status, is_featured) VALUES
@@ -205,7 +222,8 @@ INSERT OR IGNORE INTO product_variants (id, product_id, name, sku, dosage_mg, vi
 ('var-kpv-50', 'prod-kpv', '50mg × 1 vial', 'RT-KPV-50MG-1', 50, 1, 91.88, NULL, 'EUR', 0, 2);
 
 INSERT OR IGNORE INTO product_images (id, product_id, url, alt, sort_order, is_primary) VALUES
-('img-kpv', 'prod-kpv', 'https://r2.ridethetide.site/products/kpv.png', 'KPV research vial', 1, 1);
+('img-kpv', 'prod-kpv', 'https://r2.ridethetide.site/products/kpv.png', 'KPV research vial', 1, 1),
+('img-kpv-box', 'prod-kpv', 'https://r2.ridethetide.site/products/kpv-box.png', 'KPV packaging box', 2, 0);
 
 -- 19. CJC-1295 no DAC
 INSERT OR IGNORE INTO products (id, sku, code_label, name, compound_name, slug, cas_number, molecular_formula, molecular_weight, sequence, purity, category_id, short_description, full_description, overview, history, research_findings, key_areas_json, mechanism_of_action, coa_lab, hplc_purity, pubchem_id, structure_image_url, status, is_featured) VALUES
@@ -216,7 +234,8 @@ INSERT OR IGNORE INTO product_variants (id, product_id, name, sku, dosage_mg, vi
 ('var-cjcnd-10', 'prod-cjcnd', '10mg × 1 vial', 'RT-CJCND-10MG-1', 10, 1, 72.68, NULL, 'EUR', 0, 2);
 
 INSERT OR IGNORE INTO product_images (id, product_id, url, alt, sort_order, is_primary) VALUES
-('img-cjcnd', 'prod-cjcnd', 'https://r2.ridethetide.site/products/cjc-1295-no-dac.png', 'CJC-1295 no DAC vial', 1, 1);
+('img-cjcnd', 'prod-cjcnd', 'https://r2.ridethetide.site/products/cjc-1295-no-dac.png', 'CJC-1295 no DAC vial', 1, 1),
+('img-cjcnd-box', 'prod-cjcnd', 'https://r2.ridethetide.site/products/cjc-1295-no-dac-box.png', 'CJC-1295 no DAC packaging box', 2, 0);
 
 -- 20. Thymosin Alpha 1
 INSERT OR IGNORE INTO products (id, sku, code_label, name, compound_name, slug, cas_number, molecular_formula, molecular_weight, sequence, purity, category_id, short_description, full_description, overview, history, research_findings, key_areas_json, mechanism_of_action, coa_lab, hplc_purity, pubchem_id, structure_image_url, status, is_featured) VALUES
@@ -226,7 +245,8 @@ INSERT OR IGNORE INTO product_variants (id, product_id, name, sku, dosage_mg, vi
 ('var-ta1-10', 'prod-ta1', '10mg × 1 vial', 'RT-TA1-10MG-1', 10, 1, 72.68, NULL, 'EUR', 1, 1);
 
 INSERT OR IGNORE INTO product_images (id, product_id, url, alt, sort_order, is_primary) VALUES
-('img-ta1', 'prod-ta1', 'https://r2.ridethetide.site/products/thymosin-alpha-1.png', 'Thymosin Alpha 1 vial', 1, 1);
+('img-ta1', 'prod-ta1', 'https://r2.ridethetide.site/products/thymosin-alpha-1.png', 'Thymosin Alpha 1 vial', 1, 1),
+('img-ta1-box', 'prod-ta1', 'https://r2.ridethetide.site/products/thymosin-alpha-1-box.png', 'Thymosin Alpha 1 packaging box', 2, 0);
 
 -- 21. Selank
 INSERT OR IGNORE INTO products (id, sku, code_label, name, compound_name, slug, cas_number, molecular_formula, molecular_weight, sequence, purity, category_id, short_description, full_description, overview, history, research_findings, key_areas_json, mechanism_of_action, coa_lab, hplc_purity, pubchem_id, structure_image_url, status, is_featured) VALUES
@@ -236,7 +256,8 @@ INSERT OR IGNORE INTO product_variants (id, product_id, name, sku, dosage_mg, vi
 ('var-sel-5', 'prod-sel', '5mg × 1 vial', 'RT-SEL-5MG-1', 5, 1, 45.08, NULL, 'EUR', 1, 1);
 
 INSERT OR IGNORE INTO product_images (id, product_id, url, alt, sort_order, is_primary) VALUES
-('img-sel', 'prod-sel', 'https://r2.ridethetide.site/products/selank.png', 'Selank research vial', 1, 1);
+('img-sel', 'prod-sel', 'https://r2.ridethetide.site/products/selank.png', 'Selank research vial', 1, 1),
+('img-sel-box', 'prod-sel', 'https://r2.ridethetide.site/products/selank-box.png', 'Selank packaging box', 2, 0);
 
 -- 22. Semax
 INSERT OR IGNORE INTO products (id, sku, code_label, name, compound_name, slug, cas_number, molecular_formula, molecular_weight, sequence, purity, category_id, short_description, full_description, overview, history, research_findings, key_areas_json, mechanism_of_action, coa_lab, hplc_purity, pubchem_id, structure_image_url, status, is_featured) VALUES
@@ -246,7 +267,8 @@ INSERT OR IGNORE INTO product_variants (id, product_id, name, sku, dosage_mg, vi
 ('var-sem-10', 'prod-sem', '10mg × 1 vial', 'RT-SEM-10MG-1', 10, 1, 54.28, NULL, 'EUR', 1, 1);
 
 INSERT OR IGNORE INTO product_images (id, product_id, url, alt, sort_order, is_primary) VALUES
-('img-sem', 'prod-sem', 'https://r2.ridethetide.site/products/semax.png', 'Semax research vial', 1, 1);
+('img-sem', 'prod-sem', 'https://r2.ridethetide.site/products/semax.png', 'Semax research vial', 1, 1),
+('img-sem-box', 'prod-sem', 'https://r2.ridethetide.site/products/semax-box.png', 'Semax packaging box', 2, 0);
 
 -- 23. IGF-1 LR3
 INSERT OR IGNORE INTO products (id, sku, code_label, name, compound_name, slug, cas_number, molecular_formula, molecular_weight, sequence, purity, category_id, short_description, full_description, overview, history, research_findings, key_areas_json, mechanism_of_action, coa_lab, hplc_purity, pubchem_id, structure_image_url, status, is_featured) VALUES
@@ -256,7 +278,8 @@ INSERT OR IGNORE INTO product_variants (id, product_id, name, sku, dosage_mg, vi
 ('var-igf-1', 'prod-igf', '1mg × 1 vial', 'RT-IGF-1MG-1', 1, 1, 109.48, NULL, 'EUR', 1, 1);
 
 INSERT OR IGNORE INTO product_images (id, product_id, url, alt, sort_order, is_primary) VALUES
-('img-igf', 'prod-igf', 'https://r2.ridethetide.site/products/igf-1-lr3.png', 'IGF-1 LR3 research vial', 1, 1);
+('img-igf', 'prod-igf', 'https://r2.ridethetide.site/products/igf-1-lr3.png', 'IGF-1 LR3 research vial', 1, 1),
+('img-igf-box', 'prod-igf', 'https://r2.ridethetide.site/products/igf-1-lr3-box.png', 'IGF-1 LR3 packaging box', 2, 0);
 
 -- 24. DSIP
 INSERT OR IGNORE INTO products (id, sku, code_label, name, compound_name, slug, cas_number, molecular_formula, molecular_weight, sequence, purity, category_id, short_description, full_description, overview, history, research_findings, key_areas_json, mechanism_of_action, coa_lab, hplc_purity, pubchem_id, structure_image_url, status, is_featured) VALUES
@@ -266,7 +289,8 @@ INSERT OR IGNORE INTO product_variants (id, product_id, name, sku, dosage_mg, vi
 ('var-dsip-5', 'prod-dsip', '5mg × 1 vial', 'RT-DSIP-5MG-1', 5, 1, 45.08, NULL, 'EUR', 1, 1);
 
 INSERT OR IGNORE INTO product_images (id, product_id, url, alt, sort_order, is_primary) VALUES
-('img-dsip', 'prod-dsip', 'https://r2.ridethetide.site/products/dsip.png', 'DSIP research vial', 1, 1);
+('img-dsip', 'prod-dsip', 'https://r2.ridethetide.site/products/dsip.png', 'DSIP research vial', 1, 1),
+('img-dsip-box', 'prod-dsip', 'https://r2.ridethetide.site/products/dsip-box.png', 'DSIP packaging box', 2, 0);
 
 -- 25. Hexarelin
 INSERT OR IGNORE INTO products (id, sku, code_label, name, compound_name, slug, cas_number, molecular_formula, molecular_weight, sequence, purity, category_id, short_description, full_description, overview, history, research_findings, key_areas_json, mechanism_of_action, coa_lab, hplc_purity, pubchem_id, structure_image_url, status, is_featured) VALUES
@@ -276,7 +300,8 @@ INSERT OR IGNORE INTO product_variants (id, product_id, name, sku, dosage_mg, vi
 ('var-hex-5', 'prod-hex', '5mg × 1 vial', 'RT-HEX-5MG-1', 5, 1, 45.08, NULL, 'EUR', 1, 1);
 
 INSERT OR IGNORE INTO product_images (id, product_id, url, alt, sort_order, is_primary) VALUES
-('img-hex', 'prod-hex', 'https://r2.ridethetide.site/products/hexarelin.png', 'Hexarelin research vial', 1, 1);
+('img-hex', 'prod-hex', 'https://r2.ridethetide.site/products/hexarelin.png', 'Hexarelin research vial', 1, 1),
+('img-hex-box', 'prod-hex', 'https://r2.ridethetide.site/products/hexarelin-box.png', 'Hexarelin packaging box', 2, 0);
 
 -- 26. Melanotan II
 INSERT OR IGNORE INTO products (id, sku, code_label, name, compound_name, slug, cas_number, molecular_formula, molecular_weight, sequence, purity, category_id, short_description, full_description, overview, history, research_findings, key_areas_json, mechanism_of_action, coa_lab, hplc_purity, pubchem_id, structure_image_url, status, is_featured) VALUES
@@ -286,7 +311,8 @@ INSERT OR IGNORE INTO product_variants (id, product_id, name, sku, dosage_mg, vi
 ('var-mt2-10', 'prod-mt2', '10mg × 1 vial', 'RT-MT2-10MG-1', 10, 1, 45.08, NULL, 'EUR', 1, 1);
 
 INSERT OR IGNORE INTO product_images (id, product_id, url, alt, sort_order, is_primary) VALUES
-('img-mt2', 'prod-mt2', 'https://r2.ridethetide.site/products/melanotan-ii.png', 'Melanotan II research vial', 1, 1);
+('img-mt2', 'prod-mt2', 'https://r2.ridethetide.site/products/melanotan-ii.png', 'Melanotan II research vial', 1, 1),
+('img-mt2-box', 'prod-mt2', 'https://r2.ridethetide.site/products/melanotan-ii-box.png', 'Melanotan II packaging box', 2, 0);
 
 -- 27. Kisspeptin
 INSERT OR IGNORE INTO products (id, sku, code_label, name, compound_name, slug, cas_number, molecular_formula, molecular_weight, sequence, purity, category_id, short_description, full_description, overview, history, research_findings, key_areas_json, mechanism_of_action, coa_lab, hplc_purity, pubchem_id, structure_image_url, status, is_featured) VALUES
@@ -296,7 +322,8 @@ INSERT OR IGNORE INTO product_variants (id, product_id, name, sku, dosage_mg, vi
 ('var-kiss-10', 'prod-kiss', '10mg × 1 vial', 'RT-KISS-10MG-1', 10, 1, 54.28, NULL, 'EUR', 1, 1);
 
 INSERT OR IGNORE INTO product_images (id, product_id, url, alt, sort_order, is_primary) VALUES
-('img-kiss', 'prod-kiss', 'https://r2.ridethetide.site/products/kisspeptin.png', 'Kisspeptin research vial', 1, 1);
+('img-kiss', 'prod-kiss', 'https://r2.ridethetide.site/products/kisspeptin.png', 'Kisspeptin research vial', 1, 1),
+('img-kiss-box', 'prod-kiss', 'https://r2.ridethetide.site/products/kisspeptin-box.png', 'Kisspeptin packaging box', 2, 0);
 
 -- 28. Oxytocin
 INSERT OR IGNORE INTO products (id, sku, code_label, name, compound_name, slug, cas_number, molecular_formula, molecular_weight, sequence, purity, category_id, short_description, full_description, overview, history, research_findings, key_areas_json, mechanism_of_action, coa_lab, hplc_purity, pubchem_id, structure_image_url, status, is_featured) VALUES
@@ -306,7 +333,8 @@ INSERT OR IGNORE INTO product_variants (id, product_id, name, sku, dosage_mg, vi
 ('var-oxy-5', 'prod-oxy', '5mg × 1 vial', 'RT-OXY-5MG-1', 5, 1, 35.88, NULL, 'EUR', 1, 1);
 
 INSERT OR IGNORE INTO product_images (id, product_id, url, alt, sort_order, is_primary) VALUES
-('img-oxy', 'prod-oxy', 'https://r2.ridethetide.site/products/oxytocin.png', 'Oxytocin research vial', 1, 1);
+('img-oxy', 'prod-oxy', 'https://r2.ridethetide.site/products/oxytocin.png', 'Oxytocin research vial', 1, 1),
+('img-oxy-box', 'prod-oxy', 'https://r2.ridethetide.site/products/oxytocin-box.png', 'Oxytocin packaging box', 2, 0);
 
 -- 29. PT-141
 INSERT OR IGNORE INTO products (id, sku, code_label, name, compound_name, slug, cas_number, molecular_formula, molecular_weight, sequence, purity, category_id, short_description, full_description, overview, history, research_findings, key_areas_json, mechanism_of_action, coa_lab, hplc_purity, pubchem_id, structure_image_url, status, is_featured) VALUES
@@ -316,7 +344,8 @@ INSERT OR IGNORE INTO product_variants (id, product_id, name, sku, dosage_mg, vi
 ('var-pt141-10', 'prod-pt141', '10mg × 1 vial', 'RT-PT141-10MG-1', 10, 1, 54.28, NULL, 'EUR', 1, 1);
 
 INSERT OR IGNORE INTO product_images (id, product_id, url, alt, sort_order, is_primary) VALUES
-('img-pt141', 'prod-pt141', 'https://r2.ridethetide.site/products/pt-141.png', 'PT-141 research vial', 1, 1);
+('img-pt141', 'prod-pt141', 'https://r2.ridethetide.site/products/pt-141.png', 'PT-141 research vial', 1, 1),
+('img-pt141-box', 'prod-pt141', 'https://r2.ridethetide.site/products/pt-141-box.png', 'PT-141 packaging box', 2, 0);
 
 -- 30. Cagrilintide
 INSERT OR IGNORE INTO products (id, sku, code_label, name, compound_name, slug, cas_number, molecular_formula, molecular_weight, sequence, purity, category_id, short_description, full_description, overview, history, research_findings, key_areas_json, mechanism_of_action, coa_lab, hplc_purity, pubchem_id, structure_image_url, status, is_featured) VALUES
@@ -326,7 +355,8 @@ INSERT OR IGNORE INTO product_variants (id, product_id, name, sku, dosage_mg, vi
 ('var-cag-5', 'prod-cag', '5mg × 1 vial', 'RT-CAG-5MG-1', 5, 1, 72.68, NULL, 'EUR', 1, 1);
 
 INSERT OR IGNORE INTO product_images (id, product_id, url, alt, sort_order, is_primary) VALUES
-('img-cag', 'prod-cag', 'https://r2.ridethetide.site/products/cagrilintide.png', 'Cagrilintide research vial', 1, 1);
+('img-cag', 'prod-cag', 'https://r2.ridethetide.site/products/cagrilintide.png', 'Cagrilintide research vial', 1, 1),
+('img-cag-box', 'prod-cag', 'https://r2.ridethetide.site/products/cagrilintide-box.png', 'Cagrilintide packaging box', 2, 0);
 
 -- ============================================
 -- COA BATCHES (Direct Peptides style: DPS- prefix)
