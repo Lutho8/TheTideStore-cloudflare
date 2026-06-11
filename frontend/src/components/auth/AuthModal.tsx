@@ -17,7 +17,7 @@ export function AuthModal({ onClose }: { onClose: () => void }) {
     if (!phone || phone.length < 10) { setError('Enter a valid phone number'); return }
     setLoading(true)
     try {
-      const res = await apiFetch('/auth/otp', {
+      await apiFetch('/auth/otp', {
         method: 'POST',
         body: JSON.stringify({ phone, channel }),
       })

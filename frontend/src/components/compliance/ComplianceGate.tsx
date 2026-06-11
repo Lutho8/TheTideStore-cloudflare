@@ -14,12 +14,12 @@ export function ComplianceGate() {
   const [show, setShow] = useState(false)
   const [step, setStep] = useState(1)
   const [loading, setLoading] = useState(false)
-  const [status, setStatus] = useState<Record<string, boolean>>({})
+  const [_complianceStatus, setComplianceStatus] = useState<Record<string, boolean>>({})
 
   useEffect(() => {
     if (!user) return
     apiFetch('/compliance/status').then(s => {
-      setStatus(s || {})
+      setComplianceStatus(s || {})
       const next = STEPS.find(s => !s[s.key as keyof typeof s])?.number || 0
       setShow(next > 0)
       setStep(next || 1)
@@ -33,7 +33,7 @@ export function ComplianceGate() {
         method: 'POST',
         body: JSON.stringify({ [field]: true }),
       })
-      setStatus(res.compliance)
+      setComplianceStatus(res.compliance)
       const next = STEPS.find(s => !res.compliance[s.key])?.number || 0
       if (next === 0) setShow(false)
       else setStep(next)

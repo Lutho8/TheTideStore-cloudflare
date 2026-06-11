@@ -17,7 +17,7 @@ interface AuthState {
 }
 
 // Production API URL - update this after each worker deploy
-const API_URL = import.meta.env.VITE_API_URL || 'https://thetide-api.lutho-kote.workers.dev/api'
+const API_URL = (import.meta as any).env?.VITE_API_URL || 'https://thetide-api.lutho-kote.workers.dev/api'
 
 export const useAuthStore = create<AuthState>((set) => ({
   user: null,

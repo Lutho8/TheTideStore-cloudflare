@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { apiFetch, useAuthStore } from '../../hooks/useAuthStore'
-import { CreditCard, Bitcoin, Banknote, ArrowRight, Loader2, Shield, MapPin, Package } from 'lucide-react'
+import { CreditCard, Bitcoin, ArrowRight, Loader2, Shield, MapPin, Package } from 'lucide-react'
 
 const METHODS = [
   { id: 'stripe', name: 'Stripe', desc: 'Card / SEPA (Germany & EU)', icon: CreditCard },

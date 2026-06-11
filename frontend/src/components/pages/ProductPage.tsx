@@ -93,7 +93,6 @@ export function ProductPage() {
   const displayPrice = quantityType === 'pack' ? packPrice : unitPrice
 
   const dosageVariants = product.variants.filter(v => v.dosageMg !== null)
-  const hasPackOption = true
 
   let keyAreas: string[] = []
   try { if (product.keyAreasJson) keyAreas = JSON.parse(product.keyAreasJson) } catch { }
