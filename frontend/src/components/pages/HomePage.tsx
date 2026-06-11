@@ -145,18 +145,23 @@ export function HomePage() {
                 >
                   View Product <ChevronRight className="h-4 w-4" />
                 </Link>
-                <Link to={`/product/${product.slug}`} className="block bg-gray-50 rounded-xl overflow-hidden border border-gray-100 aspect-square">
+                <Link to={`/product/${product.slug}`} className="block bg-gray-50 rounded-xl overflow-hidden border border-gray-100 aspect-square relative group-hover:shadow-lg transition-all duration-300">
                   {product.images[0] ? (
                     <img
                       src={product.images[0].url}
                       alt={product.name}
-                      className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-contain p-4 group-hover:scale-105 group-hover:-translate-y-1 transition-all duration-500"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement
+                        target.style.display = 'none'
+                        const fallback = target.parentElement?.querySelector('.img-fallback') as HTMLElement
+                        if (fallback) fallback.style.display = 'flex'
+                      }}
                     />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <Beaker className="h-12 w-12 text-gray-300" />
-                    </div>
-                  )}
+                  ) : null}
+                  <div className={`img-fallback w-full h-full flex items-center justify-center ${product.images[0] ? 'hidden' : ''}`}>
+                    <Beaker className="h-12 w-12 text-gray-300" />
+                  </div>
                 </Link>
               </div>
             ))}

@@ -100,7 +100,7 @@ export function ShopPage() {
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filtered.map(product => (
-                  <div key={product.id} className="group">
+                  <div key={product.id} className="group bg-white rounded-xl p-4 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-transparent hover:border-gray-100">
                     {/* Card Header */}
                     <div className="mb-3">
                       {product.casNumber && (
@@ -123,12 +123,13 @@ export function ShopPage() {
                     </Link>
 
                     {/* Product Image */}
-                    <Link to={`/product/${product.slug}`} className="block bg-gray-50 rounded-xl overflow-hidden border border-gray-100 aspect-square">
+                    <Link to={`/product/${product.slug}`} className="block bg-gray-50 rounded-xl overflow-hidden border border-gray-100 aspect-square group-hover:shadow-lg group-hover:-translate-y-1 transition-all duration-300">
                       {product.images[0] ? (
                         <img
                           src={product.images[0].url}
                           alt={product.name}
                           className="w-full h-full object-contain p-6 group-hover:scale-105 transition-transform duration-500"
+                          onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
                         />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center">

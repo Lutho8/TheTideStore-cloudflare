@@ -120,7 +120,12 @@ export function ProductPage() {
           <div className="space-y-4">
             <div className="aspect-square bg-gray-50 rounded-xl overflow-hidden border border-gray-100">
               {product.images[0] ? (
-                <img src={product.images[0].url} alt={product.name} className="w-full h-full object-contain p-8" />
+                <img
+                  src={product.images[0].url}
+                  alt={product.name}
+                  className="w-full h-full object-contain p-8"
+                  onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
+                />
               ) : (
                 <div className="w-full h-full flex items-center justify-center">
                   <div className="text-gray-300 text-6xl font-light">{product.name.charAt(0)}</div>
@@ -131,7 +136,12 @@ export function ProductPage() {
               <div className="flex gap-2">
                 {product.images.map((img, i) => (
                   <div key={i} className="w-20 h-20 bg-gray-50 rounded-lg border border-gray-200 overflow-hidden">
-                    <img src={img.url} alt={img.alt || ''} className="w-full h-full object-contain p-2" />
+                    <img
+                      src={img.url}
+                      alt={img.alt || ''}
+                      className="w-full h-full object-contain p-2"
+                      onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
+                    />
                   </div>
                 ))}
               </div>

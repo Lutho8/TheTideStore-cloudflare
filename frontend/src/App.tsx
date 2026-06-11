@@ -11,6 +11,8 @@ import { CheckoutPage } from './components/pages/CheckoutPage'
 import { AccountPage } from './components/pages/AccountPage'
 import { useAuthStore } from './hooks/useAuthStore'
 
+import { CoaPage } from './components/pages/CoaPage'
+
 function App() {
   const [showAuth, setShowAuth] = useState(false)
   const { user, checkSession } = useAuthStore()
@@ -29,6 +31,7 @@ function App() {
           <Route path="/product/:slug" element={<ProductPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/account" element={<AccountPage />} />
+          <Route path="/coa" element={<CoaPage />} />
         </Routes>
       </main>
       <Footer />
