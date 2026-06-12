@@ -29,7 +29,14 @@ const app = new Hono<{ Bindings: Env }>()
 
 // CORS for frontend
 app.use('/api/*', cors({
-  origin: ['https://ridethetide.site', 'https://www.ridethetide.site', 'http://localhost:5173'],
+  origin: (origin) => {
+    // Allow any Pages preview URL and custom domain
+    if (!origin) return 'https://ridethetide.site'
+    if (origin.includes('thetide-store.pages.dev')) return origin
+    if (origin.includes('ridethetide.site')) return origin
+    if (origin.includes('localhost')) return origin
+    return 'https://ridethetide.site'
+  },
   allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowHeaders: ['Content-Type', 'Authorization'],
   credentials: true,

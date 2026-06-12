@@ -41,7 +41,7 @@ export function HomePage() {
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
                 Laboratory grade
               </h1>
-              <p className="text-lg text-gray-500 mb-2">Lyophilized in the USA.</p>
+              <p className="text-lg text-gray-500 mb-2">Lyophilized in the EU.</p>
               <p className="text-lg text-gray-500 mb-8">Made in-house.</p>
               <Link
                 to="/shop"
@@ -51,8 +51,19 @@ export function HomePage() {
               </Link>
             </div>
             <div className="hidden lg:flex flex-1 justify-end">
-              <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
-                <FlaskConical className="h-32 w-32 text-blue-600" />
+              <div className="relative">
+                <div className="bg-white rounded-2xl p-4 border border-gray-100 shadow-lg hover:shadow-xl transition-shadow duration-500 hover:-translate-y-2 transition-transform">
+                  <img
+                    src="https://r2.ridethetide.site/products/bpc-157.png"
+                    alt="BPC-157 research vial"
+                    className="h-48 w-auto object-contain"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = 'none'
+                    }}
+                  />
+                </div>
+                {/* Floating shadow effect */}
+                <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-3/4 h-4 bg-black/10 rounded-full blur-xl" />
               </div>
             </div>
           </div>

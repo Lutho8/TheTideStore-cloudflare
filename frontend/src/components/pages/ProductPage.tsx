@@ -259,24 +259,35 @@ export function ProductPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
           {/* Left - Images */}
           <div className="space-y-4">
-            <div className="aspect-square bg-gray-50 rounded-xl overflow-hidden border border-gray-100 shadow-sm">
-              {product.images[activeImage] ? (
-                <img
-                  src={product.images[activeImage].url}
-                  alt={product.name}
-                  className="w-full h-full object-contain p-8 transition-transform duration-300 hover:scale-105"
-                  onError={(e) => {
-                    ;(e.target as HTMLImageElement).style.display = 'none'
-                  }}
-                />
+            {/* Main Image Area - Vial + Box side by side like Direct Peptides */}
+            <div className="aspect-square bg-gray-50 rounded-xl overflow-hidden border border-gray-100 shadow-sm flex items-center justify-center p-4">
+              {product.images.length > 0 ? (
+                <div className="flex items-center justify-center gap-4 h-full w-full">
+                  {product.images.map((img, i) => (
+                    <img
+                      key={i}
+                      src={img.url}
+                      alt={img.alt || product.name}
+                      className="h-full max-h-[80%] w-auto object-contain transition-transform duration-300 hover:scale-105 drop-shadow-lg"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = 'none'
+                      }}
+                    />
+                  ))}
+                  {/* Fallback if all images fail to load */}
+                  <div className="hidden" id="img-fallback">
+                    <Beaker className="h-24 w-24 text-gray-200" />
+                  </div>
+                </div>
               ) : (
                 <div className="w-full h-full flex items-center justify-center">
                   <Beaker className="h-24 w-24 text-gray-200" />
                 </div>
               )}
             </div>
+            {/* Thumbnails */}
             {product.images.length > 1 && (
-              <div className="flex gap-3">
+              <div className="flex gap-3 justify-center">
                 {product.images.map((img, i) => (
                   <button
                     key={i}
@@ -292,7 +303,7 @@ export function ProductPage() {
                       alt={img.alt || ''}
                       className="w-full h-full object-contain p-2"
                       onError={(e) => {
-                        ;(e.target as HTMLImageElement).style.display = 'none'
+                        (e.target as HTMLImageElement).style.display = 'none'
                       }}
                     />
                   </button>
