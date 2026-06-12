@@ -45,6 +45,7 @@ export function Footer() {
             <div className="flex items-center gap-4 text-sm">
               <Link to="/privacy" className="text-gray-500 hover:text-gray-900">Privacy Policy</Link>
               <Link to="/terms" className="text-gray-500 hover:text-gray-900">Terms of Service</Link>
+              <Link to="/ambassadors" className="text-gray-500 hover:text-gray-900">Ambassadors</Link>
             </div>
           </div>
         </div>

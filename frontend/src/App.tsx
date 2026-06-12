@@ -18,6 +18,7 @@ import { ShippingPage } from './components/pages/ShippingPage'
 import { ContactPage } from './components/pages/ContactPage'
 import { TermsPage } from './components/pages/TermsPage'
 import { PrivacyPage } from './components/pages/PrivacyPage'
+import { AmbassadorPage } from './components/pages/AmbassadorPage'
 
 function App() {
   const [showAuth, setShowAuth] = useState(false)
@@ -44,6 +45,7 @@ function App() {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/terms" element={<TermsPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/ambassadors" element={<AmbassadorPage />} />
         </Routes>
       </main>
       <Footer />

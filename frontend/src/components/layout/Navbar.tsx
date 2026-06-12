@@ -47,6 +47,7 @@ export function Navbar({ onAuthClick }: { onAuthClick: () => void }) {
           <div className="hidden md:flex items-center gap-8">
             <Link to="/" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Home</Link>
             <Link to="/shop" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Products</Link>
+            <Link to="/ambassadors" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Ambassadors</Link>
             <a href="https://blog.ridethetide.site/blog/" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Blog</a>
             <Link to="/coa" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">COA</Link>
           </div>
@@ -136,6 +137,7 @@ export function Navbar({ onAuthClick }: { onAuthClick: () => void }) {
         <div className="md:hidden border-t border-gray-200 bg-white px-4 py-4 space-y-3 shadow-lg">
           <Link to="/" onClick={() => setMobileOpen(false)} className="block text-sm text-gray-600 hover:text-gray-900 py-1">Home</Link>
           <Link to="/shop" onClick={() => setMobileOpen(false)} className="block text-sm text-gray-600 hover:text-gray-900 py-1">Products</Link>
+          <Link to="/ambassadors" onClick={() => setMobileOpen(false)} className="block text-sm text-gray-600 hover:text-gray-900 py-1">Ambassadors</Link>
           <a href="https://blog.ridethetide.site/blog/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileOpen(false)} className="block text-sm text-gray-600 hover:text-gray-900 py-1">Blog</a>
           <Link to="/coa" onClick={() => setMobileOpen(false)} className="block text-sm text-gray-600 hover:text-gray-900 py-1">COA</Link>
 
